@@ -13,11 +13,16 @@
          {{-- <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"> --}}
         <link href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i"
         rel="stylesheet">
-        {{-- <link rel="stylesheet" href = " {{ URL::asset('css/bootsrap-grid2.min.css')}}"> --}}
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.0/dist/css/bootstrap.min.css" rel="stylesheet">
+        
+       
         <link href="https://cdn.jsdelivr.net/gh/gitbrent/bootstrap4-toggle@3.6.1/css/bootstrap4-toggle.min.css" rel="stylesheet">
+        
+        
         <!-- Our Custom CSS -->
         {{-- <link rel="stylesheet" href=" {{ URL::asset('css/style.css')}}"> --}}
         <link rel="stylesheet" href=" {{ URL::asset('css/fl-table.css')}}">
+        <link rel="stylesheet" href=" {{ URL::asset('css/user-list.css')}}">
         <link rel="stylesheet" href=" {{ URL::asset('css/sb-admin-2.min.css')}}">
         <link rel="stylesheet" href=" {{ URL::asset('scss/tab.scss')}}">
         {{-- <link rel="stylesheet" href=" {{ URL::asset('css/bootstrapmin.css')}}"> --}}
@@ -504,15 +509,16 @@
              });
          </script> --}}
              <!-- Bootstrap core JavaScript-->
-            
+             <script src="https://code.jquery.com/jquery-1.12.0.min.js"></script>
             <script src="https://cdn.jsdelivr.net/npm/sweetalert2@10"></script>
-            <script src="https://code.jquery.com/jquery-1.12.0.min.js"></script>
+            
             <script src="{{ URL::asset('vendor/jquery/jquery.min.js') }}"></script>
             <script src="{{ URL::asset('vendor/bootstrap/js/bootstrap.bundle.min.js') }}"></script>
 
             <!-- Core plugin JavaScript-->
             <script src="{{ URL::asset('vendor/jquery-easing/jquery.easing.min.js') }}"></script>
             <script src="https://cdn.jsdelivr.net/gh/gitbrent/bootstrap4-toggle@3.6.1/js/bootstrap4-toggle.min.js"></script>
+            <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.0/dist/js/bootstrap.bundle.min.js"></script>
             <!-- Custom scripts for all pages-->
             <script src="{{ URL::asset('js/sb-admin-2.min.js') }}"></script>
 

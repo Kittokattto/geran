@@ -95,7 +95,7 @@ Dashboard
 <div class="row">
 
     <!-- Area Chart -->
-    <div class="col-xl-8 col-lg-7">
+    <div class="col-xl-7 col-lg-7">
         <div class="card shadow mb-4">
             <!-- Card Header - Dropdown -->
             <div
@@ -126,7 +126,7 @@ Dashboard
     </div>
 
     <!-- Pie Chart -->
-    <div class="col-xl-4 col-lg-5">
+    <div class="col-xl-5 col-lg-5">
         <div class="card shadow mb-4">
             <!-- Card Header - Dropdown -->
             <div
@@ -149,20 +149,121 @@ Dashboard
             </div>
             <!-- Card Body -->
             <div class="card-body">
-                <div class="chart-pie pt-4 pb-2">
-                    <canvas id="myPieChart"></canvas>
-                </div>
-                <div class="mt-4 text-center small">
-                    <span class="mr-2">
-                        <i class="fas fa-circle text-primary"></i> Direct
-                    </span>
-                    <span class="mr-2">
-                        <i class="fas fa-circle text-success"></i> Social
-                    </span>
-                    <span class="mr-2">
-                        <i class="fas fa-circle text-info"></i> Referral
-                    </span>
-                </div>
+
+                <div class="user-dashboard-info-box table-responsive mb-0 bg-white p-4 shadow-sm">
+                    <table class="table manage-candidates-top mb-0">
+                      <thead>
+                        <tr>
+                          <th>Candidate Name</th>
+                          {{-- <th class="text-center">Status</th>
+                          <th class="action text-right">Action</th> --}}
+                        </tr>
+                      </thead>
+                      <tbody>
+                        <tr class="candidates-list">
+                          <td class="title">
+                            <div class="thumb">
+                              <img class="img-fluid" src="https://bootdey.com/img/Content/avatar/avatar7.png" alt="">
+                            </div>
+                            <div class="candidate-list-details">
+                              <div class="candidate-list-info">
+                                <div class="candidate-list-title">
+                                  <h5 class="mb-0"><a href="#">Brooke Kelly</a></h5>
+                                </div>
+                                <div class="candidate-list-option">
+                                  <ul class="list-unstyled">
+                                    <li><i class="fas fa-filter pr-1"></i>Information Technology</li>
+                                    <li><i class="fas fa-map-marker-alt pr-1"></i>Rolling Meadows, IL 60008</li>
+                                  </ul>
+                                </div>
+                              </div>
+                            </div>
+                          </td>
+                          {{-- <td class="candidate-list-favourite-time text-center">
+                            <a class="candidate-list-favourite order-2 text-danger" href="#"><i class="fas fa-heart"></i></a>
+                            <span class="candidate-list-time order-1">Shortlisted</span>
+                          </td>
+                          <td>
+                            <ul class="list-unstyled mb-0 d-flex justify-content-end">
+                              <li><a href="#" class="text-primary" data-toggle="tooltip" title="" data-original-title="view"><i class="far fa-eye"></i></a></li>
+                              <li><a href="#" class="text-info" data-toggle="tooltip" title="" data-original-title="Edit"><i class="fas fa-pencil-alt"></i></a></li>
+                              <li><a href="#" class="text-danger" data-toggle="tooltip" title="" data-original-title="Delete"><i class="far fa-trash-alt"></i></a></li>
+                            </ul>
+                          </td> --}}
+                        </tr>
+                        <tr class="candidates-list">
+                          <td class="title">
+                            <div class="thumb">
+                              <img class="img-fluid" src="https://bootdey.com/img/Content/avatar/avatar1.png" alt="">
+                            </div>
+                            <div class="candidate-list-details">
+                              <div class="candidate-list-info">
+                                <div class="candidate-list-title">
+                                  <h5 class="mb-0"><a href="#">Ronald Bradley</a></h5>
+                                </div>
+                                <div class="candidate-list-option">
+                                  <ul class="list-unstyled">
+                                    <li><i class="fas fa-filter pr-1"></i>Recruitment Consultancy</li>
+                                    <li><i class="fas fa-map-marker-alt pr-1"></i>Minneapolis</li>
+                                  </ul>
+                                </div>
+                              </div>
+                            </div>
+                          </td>
+                          {{-- <td class="candidate-list-favourite-time text-center">
+                            <a class="candidate-list-favourite order-2 text-danger" href="#"><i class="fas fa-heart"></i></a>
+                            <span class="candidate-list-time order-1">Shortlisted</span>
+                          </td>
+                          <td>
+                            <ul class="list-unstyled mb-0 d-flex justify-content-end">
+                              <li><a href="#" class="text-primary" data-toggle="tooltip" title="" data-original-title="view"><i class="far fa-eye"></i></a></li>
+                              <li><a href="#" class="text-info" data-toggle="tooltip" title="" data-original-title="Edit"><i class="fas fa-pencil-alt"></i></a></li>
+                              <li><a href="#" class="text-danger" data-toggle="tooltip" title="" data-original-title="Delete"><i class="far fa-trash-alt"></i></a></li>
+                            </ul>
+                          </td> --}}
+                        </tr>
+                        <tr class="candidates-list">
+                          <td class="title">
+                            <div class="thumb">
+                              <img class="img-fluid" src="https://bootdey.com/img/Content/avatar/avatar2.png" alt="">
+                            </div>
+                            <div class="candidate-list-details">
+                              <div class="candidate-list-info">
+                                <div class="candidate-list-title">
+                                  <h5 class="mb-0"><a href="#">Rafael Briggs</a></h5>
+                                </div>
+                                <div class="candidate-list-option">
+                                  <ul class="list-unstyled">
+                                    <li><i class="fas fa-filter pr-1"></i>Recruitment Consultancy</li>
+                                    <li><i class="fas fa-map-marker-alt pr-1"></i>Haines Cit</li>
+                                  </ul>
+                                </div>
+                              </div>
+                            </div>
+                          </td>
+                          {{-- <td class="candidate-list-favourite-time text-center">
+
+                          </td>
+                          <td>
+
+                          </td> --}}
+                        </tr>
+
+                        
+                      </tbody>
+                    </table>
+                    <div class="text-center mt-3 mt-sm-3">
+                      <ul class="pagination justify-content-center mb-0">
+                        <li class="page-item disabled"> <span class="page-link">Prev</span> </li>
+                        <li class="page-item active" aria-current="page"><span class="page-link">1 </span> <span class="sr-only">(current)</span></li>
+                        <li class="page-item"><a class="page-link" href="#">2</a></li>
+                        <li class="page-item"><a class="page-link" href="#">3</a></li>
+                        <li class="page-item"><a class="page-link" href="#">...</a></li>
+                        <li class="page-item"><a class="page-link" href="#">25</a></li>
+                        <li class="page-item"> <a class="page-link" href="#">Next</a> </li>
+                      </ul>
+                    </div>
+                  </div>
             </div>
         </div>
     </div>
