@@ -5,20 +5,21 @@ Senarai Pengguna
 @endsection
 @section('search')
 
-<form action="{!! url('/pengguna/search')!!}" method="get" class="d-none d-sm-inline-block shadow-sm">
+@if (getAccessStatusUser()=='yes')
+<form action="{!! url('/pengguna/search')!!}" name="searchForm"   onsubmit="return validateForm()" method="get" class="d-none d-sm-inline-block shadow-sm">
 	<div class="input-group">
 	<select name="type" class="form-control  bg-light border-right-2 ">
-		<option value="" disabled selected hidden>Pilih Jenis Carian...</option>
+
 		<option value="address">Alamat</option>
 		<option value="department">Jabatan</option>
 		<option value="email">Email</option>
-		<option value="name">Nama</option>
+		<option value="name" selected>Nama</option>
 		<option value="phone">No Telefon</option>
-		<option value="registerBy">Didaftar Oleh</option>
+		
 	</select>
 	<hr>
 	
-	<input type="search" name="search" class="form-control bg-light border-0 small" placeholder="Cari Nama Pengguna..."
+	<input type="search" id="search" name="search" class="form-control bg-light border-0 small" placeholder="Cari Nama Pengguna..."
 		aria-label="Search" aria-describedby="basic-addon2">
 	
 	<div class="input-group-append">
@@ -28,6 +29,7 @@ Senarai Pengguna
 	</div>
 </div>
 </form>
+@endif
 
 {{-- <a href="#" class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm"><i
 	class="fas fa-download fa-sm text-white-50"></i> Generate Report</a> --}}
@@ -63,11 +65,11 @@ Senarai Pengguna
 					<div class="col-md-12 col-sm-12 col-xs-12">
 						<div class="checkbox checkbox-success checkbox-circle">
 							@if(session('message') == 'Successfully Submitted')
-							<label for="checkbox-10 colo_success"> {{trans('Successfully Submitted')}}  </label>
+							<div class="bg-success text-white shadow"> {{trans('Successfully Submitted')}}  </div>
 						   @elseif(session('message')=='Successfully Updated')
-						   <label for="checkbox-10 colo_success"> {{ trans('app.Successfully Updated')}}  </label>
+						   <div for="checkbox-10 colo_success" class="bg-success text-white shadow"> {{ trans('Successfully Updated')}}  </div>
 						   @elseif(session('message')=='Successfully Deleted')
-						   <label for="checkbox-10 colo_success"> {{ trans('app.Successfully Deleted')}}  </label>
+						   <div for="checkbox-10 colo_success" class="bg-success text-white shadow"> {{ trans('Successfully Deleted')}}  </div>
 						   @endif
 						</div>
 					</div>
@@ -213,6 +215,18 @@ Senarai Pengguna
 // } );
    
   </script>
+<script>
+	function validateForm()
+	{
+		var x = document.forms["searchForm"]["search"].value;
 
+		if (x == null| x == "")
+		{
+		
+			return false;
+		}
+	
+	}
+</script>
 
 @endsection

@@ -48,16 +48,16 @@ Dashboard
             <div class="card-body">
                 <div class="row no-gutters align-items-center">
                     <div class="col mr-2">
-                        <div class="text-xs font-weight-bold text-info text-uppercase mb-1">?
+                        <div class="text-xs font-weight-bold text-info text-uppercase mb-1">Perkembangan Tugas
                         </div>
                         <div class="row no-gutters align-items-center">
                             <div class="col-auto">
-                                <div class="h5 mb-0 mr-3 font-weight-bold text-gray-800">50%</div>
+                                <div class="h5 mb-0 mr-3 font-weight-bold text-gray-800">{{$percent}}%</div>
                             </div>
                             <div class="col">
                                 <div class="progress progress-sm mr-2">
                                     <div class="progress-bar bg-info" role="progressbar"
-                                        style="width: 50%" aria-valuenow="50" aria-valuemin="0"
+                                        style="width: {{$percent}}%" aria-valuenow="{{$percent}}" aria-valuemin="0"
                                         aria-valuemax="100"></div>
                                 </div>
                             </div>
@@ -78,11 +78,11 @@ Dashboard
                 <div class="row no-gutters align-items-center">
                     <div class="col mr-2">
                         <div class="text-xs font-weight-bold text-warning text-uppercase mb-1">
-                            ?</div>
-                        <div class="h5 mb-0 font-weight-bold text-gray-800">18</div>
+                            Fail yang di tanda</div>
+                        <div class="h5 mb-0 font-weight-bold text-gray-800">{{$jumlah_book}}</div>
                     </div>
                     <div class="col-auto">
-                        <i class="fas fa-comments fa-2x text-gray-300"></i>
+                        <i class="fas fa-bookmark fa-2x text-gray-300"></i>
                     </div>
                 </div>
             </div>
@@ -95,12 +95,11 @@ Dashboard
 <div class="row">
 
     <!-- Area Chart -->
-    <div class="col-xl-7 col-lg-7">
-        <div class="card shadow mb-4">
+    <div class="col-xl-8 col-lg-8">
+        <div class="card shadow mb-4" >
             <!-- Card Header - Dropdown -->
-            <div
-                class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
-                <h6 class="m-0 font-weight-bold text-primary">Earnings Overview</h6>
+            <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
+                <h6 class="m-0 font-weight-bold text-primary">Fail Terkini</h6>
                 <div class="dropdown no-arrow">
                     <a class="dropdown-toggle" href="#" role="button" id="dropdownMenuLink"
                         data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
@@ -117,21 +116,128 @@ Dashboard
                 </div>
             </div>
             <!-- Card Body -->
-            <div class="card-body">
-                <div class="chart-area">
-                    <canvas id="myAreaChart"></canvas>
-                </div>
+            <div class="card-body" >
+                
+                <div class="table-responsive" id="proTeamScroll" tabindex="2" style="height: overflow: hidden; outline: none;">
+                <table class="table table-striped">
+                    <thead>
+                        <tr>
+                            <th>No. HM</th>
+                            <th>Jenis Geran</th>
+                            <th>No. Lot</th>
+                            <th>No. Pelan</th>
+                            <th>No. Fail</th>
+                            <th>Tarikh Daftar</th>
+                            <th>Didaftar</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @if (!empty($fail))
+                        @foreach( $fail as $fails)
+                        <tr>
+                            <td>
+                                {{$fails->no_hakmilik}}
+                            </td>
+                            <td>
+                                <h6 class="mb-0 font-13">{{$fails->tajuk_geran}}</h6>
+                                
+                            </td>
+                            <td>{{$fails->no_lot}}</td>
+                            <td>
+                                {{$fails->no_pelan}}
+                            </td>
+                            <td>
+                                <div class="badge-outline col-red">{{$fails->no_fail}}</div>
+                            </td>
+                            <td >
+                                {{$fails->tarikh_daftar}}
+                            </td>
+                            <td>
+                                <a href="{!! url('/failkes/show/'.$fails->geran_id) !!}"><button type="button" class="btn btn-round btn-info">{{ trans('View') }}</button></a>
+                            </td>
+                        </tr>
+                        @endforeach
+                        @endif
+                        {{-- <tr>
+                            <td class="table-img"><img src="https://bootdey.com/img/Content/avatar/avatar1.png" alt="">
+                            </td>
+                            <td>
+                                <h6 class="mb-0 font-13">Android Game App</h6>
+                                <p class="m-0 font-12">
+                                    Assigned to<span class="col-green font-weight-bold"> Sarah Smith</span>
+                                </p>
+                            </td>
+                            <td>22-05-2019</td>
+                            <td class="text-truncate">
+                                <ul class="list-unstyled order-list m-b-0">
+                                    <li class="team-member team-member-sm"><img class="rounded-circle" src="https://bootdey.com/img/Content/avatar/avatar1.png" alt="user" data-toggle="tooltip" title="" data-original-title="Wildan Ahdian"></li>
+                                    <li class="team-member team-member-sm"><img class="rounded-circle" src="https://bootdey.com/img/Content/avatar/avatar3.png" alt="user" data-toggle="tooltip" title="" data-original-title="John Deo"></li>
+                                    <li class="team-member team-member-sm"><img class="rounded-circle" src="https://bootdey.com/img/Content/avatar/avatar4.png" alt="user" data-toggle="tooltip" title="" data-original-title="Sarah Smith"></li>
+                                    <li class="avatar avatar-sm"><span class="badge badge-primary">+4</span></li>
+                                </ul>
+                            </td>
+                            <td>
+                                <div class="badge-outline col-green">Low</div>
+                            </td>
+                            <td class="align-middle">
+                                <div class="progress-text">55%</div>
+                                <div class="progress" data-height="6" style="height: 6px;">
+                                    <div class="progress-bar bg-purple" data-width="55%" style="width: 55%;"></div>
+                                </div>
+                            </td>
+                            <td>
+                                <a data-toggle="tooltip" title="" data-original-title="Edit"><i class="fas fa-pencil-alt"></i></a>
+                                <a data-toggle="tooltip" title="" data-original-title="Delete"><i class="far fa-trash-alt"></i></a>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td class="table-img"><img src="https://bootdey.com/img/Content/avatar/avatar5.png" alt="">
+                            </td>
+                            <td>
+                                <h6 class="mb-0 font-13">Java Web Service</h6>
+                                <p class="m-0 font-12">
+                                    Assigned to<span class="col-green font-weight-bold"> Cara Stevens</span>
+                                </p>
+                            </td>
+                            <td>11-04-2019</td>
+                            <td class="text-truncate">
+                                <ul class="list-unstyled order-list m-b-0">
+                                    <li class="team-member team-member-sm"><img class="rounded-circle" src="https://bootdey.com/img/Content/avatar/avatar6.png" alt="user" data-toggle="tooltip" title="" data-original-title="Wildan Ahdian"></li>
+                                    <li class="team-member team-member-sm"><img class="rounded-circle" src="https://bootdey.com/img/Content/avatar/avatar2.png" alt="user" data-toggle="tooltip" title="" data-original-title="John Deo"></li>
+                                    <li class="team-member team-member-sm"><img class="rounded-circle" src="https://bootdey.com/img/Content/avatar/avatar1.png" alt="user" data-toggle="tooltip" title="" data-original-title="Sarah Smith"></li>
+                                    <li class="avatar avatar-sm"><span class="badge badge-primary">+4</span></li>
+                                </ul>
+                            </td>
+                            <td>
+                                <div class="badge-outline col-blue">Medium</div>
+                            </td>
+                            <td class="align-middle">
+                                <div class="progress-text">70%</div>
+                                <div class="progress" data-height="6" style="height: 6px;">
+                                    <div class="progress-bar" data-width="70%" style="width: 70%;"></div>
+                                </div>
+                            </td>
+                            <td>
+                                <a data-toggle="tooltip" title="" data-original-title="Edit"><i class="fas fa-pencil-alt"></i></a>
+                                <a data-toggle="tooltip" title="" data-original-title="Delete"><i class="far fa-trash-alt"></i></a>
+                            </td>
+                        </tr> --}}
+                        
+                        
+
+                    </tbody>
+                </table>
+            </div>
             </div>
         </div>
     </div>
 
     <!-- Pie Chart -->
-    <div class="col-xl-5 col-lg-5">
+    <div class="col-xl-4 col-lg-4">
         <div class="card shadow mb-4">
             <!-- Card Header - Dropdown -->
-            <div
-                class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
-                <h6 class="m-0 font-weight-bold text-primary">Revenue Sources</h6>
+            <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
+                <h6 class="m-0 font-weight-bold text-primary">Pengguna Baharu</h6>
                 <div class="dropdown no-arrow">
                     <a class="dropdown-toggle" href="#" role="button" id="dropdownMenuLink"
                         data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
@@ -150,127 +256,63 @@ Dashboard
             <!-- Card Body -->
             <div class="card-body">
 
-                <div class="user-dashboard-info-box table-responsive mb-0 bg-white p-4 shadow-sm">
-                    <table class="table manage-candidates-top mb-0">
-                      <thead>
-                        <tr>
-                          <th>Candidate Name</th>
-                          {{-- <th class="text-center">Status</th>
-                          <th class="action text-right">Action</th> --}}
-                        </tr>
-                      </thead>
-                      <tbody>
-                        <tr class="candidates-list">
-                          <td class="title">
-                            <div class="thumb">
-                              <img class="img-fluid" src="https://bootdey.com/img/Content/avatar/avatar7.png" alt="">
-                            </div>
-                            <div class="candidate-list-details">
-                              <div class="candidate-list-info">
-                                <div class="candidate-list-title">
-                                  <h5 class="mb-0"><a href="#">Brooke Kelly</a></h5>
-                                </div>
-                                <div class="candidate-list-option">
-                                  <ul class="list-unstyled">
-                                    <li><i class="fas fa-filter pr-1"></i>Information Technology</li>
-                                    <li><i class="fas fa-map-marker-alt pr-1"></i>Rolling Meadows, IL 60008</li>
-                                  </ul>
+                
+
+            <table class="mb-0 table table-hover user-dashboard-info-box ">
+                <thead>
+                    <tr >
+
+                        <th class="align-middle bt-0">Nama Pekerja </th>
+                        <th class="align-middle bt-0">Status</th>
+                        {{-- <th class="align-middle bt-0">People</th> --}}
+                    </tr>
+                </thead>
+                <tbody>
+                    @if (!empty($user))
+                    @foreach ($user as $users)
+                    <tr class="candidates-list">
+
+                       
+                            <td class="title">
+                              <div class="thumb">
+                                <img  class="img-fluid" src="{{asset('storage/'. $users->gambar)}}">
+                              </div>
+                              <div class="candidate-list-details">
+                                <div class="candidate-list-info">
+                                  <div class="candidate-list-title">
+                                    <h6 class="mb-0"><a href="{!! url('/pengguna/show/'.$users->id) !!}">{{getssmallLength($users->name)}}</a></h6>
+                                  </div>
+                                  <div class="candidate-list-option">
+                                    <ul class="list-unstyled">
+                                      <li><i class="fas fa-filter pr-1"></i>{{$users->department}}</li>
+                                      <li><i class="fas fa-map-marker-alt pr-1"></i>{{getssmallLength($users->address)}}</li>
+                                    </ul>
+                                  </div>
                                 </div>
                               </div>
-                            </div>
-                          </td>
-                          {{-- <td class="candidate-list-favourite-time text-center">
-                            <a class="candidate-list-favourite order-2 text-danger" href="#"><i class="fas fa-heart"></i></a>
-                            <span class="candidate-list-time order-1">Shortlisted</span>
-                          </td>
-                          <td>
-                            <ul class="list-unstyled mb-0 d-flex justify-content-end">
-                              <li><a href="#" class="text-primary" data-toggle="tooltip" title="" data-original-title="view"><i class="far fa-eye"></i></a></li>
-                              <li><a href="#" class="text-info" data-toggle="tooltip" title="" data-original-title="Edit"><i class="fas fa-pencil-alt"></i></a></li>
-                              <li><a href="#" class="text-danger" data-toggle="tooltip" title="" data-original-title="Delete"><i class="far fa-trash-alt"></i></a></li>
-                            </ul>
-                          </td> --}}
-                        </tr>
-                        <tr class="candidates-list">
-                          <td class="title">
-                            <div class="thumb">
-                              <img class="img-fluid" src="https://bootdey.com/img/Content/avatar/avatar1.png" alt="">
-                            </div>
-                            <div class="candidate-list-details">
-                              <div class="candidate-list-info">
-                                <div class="candidate-list-title">
-                                  <h5 class="mb-0"><a href="#">Ronald Bradley</a></h5>
+                            </td>
+                            <td class="align-middle">
+                                <div class="mb-2 progress" style="height: 5px;">
+                                    <div class="progress-bar" role="progressbar" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100" style="width: 25%;"></div>
                                 </div>
-                                <div class="candidate-list-option">
-                                  <ul class="list-unstyled">
-                                    <li><i class="fas fa-filter pr-1"></i>Recruitment Consultancy</li>
-                                    <li><i class="fas fa-map-marker-alt pr-1"></i>Minneapolis</li>
-                                  </ul>
-                                </div>
-                              </div>
-                            </div>
-                          </td>
-                          {{-- <td class="candidate-list-favourite-time text-center">
-                            <a class="candidate-list-favourite order-2 text-danger" href="#"><i class="fas fa-heart"></i></a>
-                            <span class="candidate-list-time order-1">Shortlisted</span>
-                          </td>
-                          <td>
-                            <ul class="list-unstyled mb-0 d-flex justify-content-end">
-                              <li><a href="#" class="text-primary" data-toggle="tooltip" title="" data-original-title="view"><i class="far fa-eye"></i></a></li>
-                              <li><a href="#" class="text-info" data-toggle="tooltip" title="" data-original-title="Edit"><i class="fas fa-pencil-alt"></i></a></li>
-                              <li><a href="#" class="text-danger" data-toggle="tooltip" title="" data-original-title="Delete"><i class="far fa-trash-alt"></i></a></li>
-                            </ul>
-                          </td> --}}
-                        </tr>
-                        <tr class="candidates-list">
-                          <td class="title">
-                            <div class="thumb">
-                              <img class="img-fluid" src="https://bootdey.com/img/Content/avatar/avatar2.png" alt="">
-                            </div>
-                            <div class="candidate-list-details">
-                              <div class="candidate-list-info">
-                                <div class="candidate-list-title">
-                                  <h5 class="mb-0"><a href="#">Rafael Briggs</a></h5>
-                                </div>
-                                <div class="candidate-list-option">
-                                  <ul class="list-unstyled">
-                                    <li><i class="fas fa-filter pr-1"></i>Recruitment Consultancy</li>
-                                    <li><i class="fas fa-map-marker-alt pr-1"></i>Haines Cit</li>
-                                  </ul>
-                                </div>
-                              </div>
-                            </div>
-                          </td>
-                          {{-- <td class="candidate-list-favourite-time text-center">
+                                <div>Tasks Completed:<span class="text-inverse">36/94</span></div>
+                            </td>
+                    </tr>
+                    @endforeach
+                    @endif
 
-                          </td>
-                          <td>
+                 
 
-                          </td> --}}
-                        </tr>
+                </tbody>
+            </table>
 
-                        
-                      </tbody>
-                    </table>
-                    <div class="text-center mt-3 mt-sm-3">
-                      <ul class="pagination justify-content-center mb-0">
-                        <li class="page-item disabled"> <span class="page-link">Prev</span> </li>
-                        <li class="page-item active" aria-current="page"><span class="page-link">1 </span> <span class="sr-only">(current)</span></li>
-                        <li class="page-item"><a class="page-link" href="#">2</a></li>
-                        <li class="page-item"><a class="page-link" href="#">3</a></li>
-                        <li class="page-item"><a class="page-link" href="#">...</a></li>
-                        <li class="page-item"><a class="page-link" href="#">25</a></li>
-                        <li class="page-item"> <a class="page-link" href="#">Next</a> </li>
-                      </ul>
-                    </div>
-                  </div>
-            </div>
+
         </div>
     </div>
 </div>
 
 <!-- Content Row -->
-<div class="row">
+{{-- <div class="row">
 
     <!-- Content Column -->
     <div class="col-lg-6 mb-4">
@@ -420,5 +462,5 @@ Dashboard
         </div>
 
     </div>
-</div>
+</div> --}}
 @endsection

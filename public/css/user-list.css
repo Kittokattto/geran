@@ -4,8 +4,8 @@
     margin-right: 20px;
 }
 .user-dashboard-info-box .candidates-list .thumb img {
-    width: 80px;
-    height: 80px;
+    width: 48px;
+    height: 48px;
     -o-object-fit: cover;
     object-fit: cover;
     overflow: hidden;
@@ -15,7 +15,7 @@
 .user-dashboard-info-box .title {
     display: -webkit-box;
     display: -ms-flexbox;
-    width: 250px;
+    
     -webkit-box-align: center;
     -ms-flex-align: center;
     align-items: center;
@@ -23,7 +23,8 @@
 }
 
 .candidate-list{
-    width: 500px;
+   
+    height: 80px;
 }
 
 .user-dashboard-info-box .candidates-list td {
@@ -49,6 +50,7 @@
 /* .table.manage-candidates-top {
     min-width: 650px;
 } */
+
 
 .user-dashboard-info-box .candidate-list-details ul {
     color: #969696;

@@ -70,7 +70,7 @@ Mengemaskini Fail Kes
                                                             <option value="Geran"<?php if($geran->tajuk_geran == 'Geran'){ echo "selected"; }?>>Geran</option>
                                                             <option value="Geran Mukim"<?php if($geran->tajuk_geran == 'Geran Mukim'){ echo "selected"; }?>>Geran Mukim</option>
                                                             <option value="Pajakan"<?php if($geran->tajuk_geran == 'Pajakan'){ echo "selected"; }?>>Pajakan</option>
-                                                            <option value="Pajakan Mukim"<?php if($geran->tajuk_geran == 'pajakan'){ echo "selected"; }?>>Pajakan Mukim</option>
+                                                            <option value="Pajakan Mukim"<?php if($geran->tajuk_geran == 'Pajakan Mukim'){ echo "selected"; }?>>Pajakan Mukim</option>
                                                             <option value="Hakmilik Sementara Daerah"<?php if($geran->tajuk_geran == 'Hakmilik Sementara Daerah'){ echo "selected"; }?>>Hakmilik Sementara Daerah</option>
                                                             <option value="Hakmilik Sementara Mukim"<?php if($geran->tajuk_geran == 'Hakmilik Sementara Mukim'){ echo "selected"; }?>>Hakmilik Sementara Mukim</option>
             
@@ -100,13 +100,13 @@ Mengemaskini Fail Kes
             
                                             <div class="row">
                                              
-                                                <div class="col-md-6 col-sm-6 col-xs-12 form-group has-feedback {{ $errors->has('pemilik') ? ' has-error' : '' }} ">
-                                                    <label class="control-label col-md-4 col-sm-4 col-xs-12" for="display-name">{{ trans('Pemilik')}} <label class="text-danger">*</label></label>
+                                                <div class="col-md-6 col-sm-6 col-xs-12 form-group has-feedback">
+                                                    <label class="control-label col-md-4 col-sm-4 col-xs-12" for="display-name">{{ trans('Cukai Tahunan')}} <label class="text-danger">*</label></label>
                                                     <div class="col-md-8 col-sm-8 col-xs-12">
-                                                        <input type="text"  name="pemilik" placeholder="{{ $geran->pemilik}}" value="{{ $geran->pemilik }}" class="form-control" maxlength="25" required>
-                                                        @if ($errors->has('pemilik'))
-                                                        <span class="help-block">
-                                                            <strong>{{ $errors->first('pemilik') }}</strong>
+                                                        <label class="control-label ">RM :  </label><label class="control-label"><input type="text"  name="cukai" placeholder="{{$geran->cukai}}" value="{{ $geran->cukai }}" class="form-control"></label>
+                                                        @if ($errors->has('cukai'))
+                                                        <span class="help-block text-danger" autofocus>
+                                                            <strong>{{ $errors->first('cukai') }}</strong>
                                                         </span>
                                                         @endif
                                                     </div>
@@ -331,7 +331,7 @@ Mengemaskini Fail Kes
                                                     <label class="control-label col-md-4 col-sm-4 col-xs-12" for="display-name">{{ trans('Tarikh Daftar')}} <label class="text-danger">*</label></label>
                                                     <div class="col-md-8 col-sm-8 col-xs-12">
                                                         
-                                                        <input type="text"  name="daftar" placeholder="{{ $geran->tarikh_daftar}}" value="{{ $geran->tarikh_daftar }}" class="form-control" maxlength="25" required >
+                                                        <input type="text"  name="daftar" placeholder="{{ date('j F Y',strtotime($geran->tarikh_daftar)) }}" value=" {{ date('j F Y',strtotime($geran->tarikh_daftar)) }}" class="form-control" maxlength="25" required >
                                                         @if ($errors->has('daftar'))
                                                         <span class="help-block">
                                                             <strong>{{ $errors->first('daftar') }}</strong>
@@ -385,7 +385,71 @@ Mengemaskini Fail Kes
                                       </div>
                                     </div>
   
-                                      
+                                    <div class="card shadow mb-4">
+                                        <div class="card-header py-3">
+                                            <h6 class="m-0 font-weight-bold text-primary">Rekod Ketuanpunyaan</h6>
+                                        </div>
+                                        <div class="card-body">
+                                            <div class="row">  
+                                                <div class="col-md-6 col-sm-6 col-xs-12 form-group has-feedback">
+                                                    <label class="control-label col-md-4 col-sm-4 col-xs-12" for="display-name">{{ trans('Pemilik')}} <label class="text-danger">*</label></label>
+                                                    <div class="col-md-8 col-sm-8 col-xs-12">
+                                                        <input type="text"  name="pemilik" placeholder="{{ $geran->pemilik}}" value="{{ $geran->pemilik }}" class="form-control"  >
+                                                        @if ($errors->has('pemilik'))
+                                                        <span class="help-block text-danger" autofocus>
+                                                            <strong>{{ $errors->first('pemilik') }}</strong>
+                                                        </span>
+                                                        @endif
+
+                                                    </div>
+                                                </div>
+                                                
+
+                                                <div class="col-md-6 col-sm-6 col-xs-12 form-group has-feedback">
+                                                    <label class="control-label col-md-4 col-sm-4 col-xs-12" for="display-name">{{ trans('No Kad Pengenalan')}} <label class="text-danger">*</label></label>
+                                                    <div class="col-md-8 col-sm-8 col-xs-12 input-group date">
+                                                        <input type="text" id="ic"  name="ic" placeholder="{{ $geran->ic}}" value="{{ $geran->ic }}" class="form-control" maxlength="25" >
+                                                        @if ($errors->has('ic'))
+                                                        <span class="help-block text-danger" autofocus>
+                                                            <strong>{{ $errors->first('ic') }}</strong>
+                                                        </span>
+                                                        @endif
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        
+                                              <div class="row">  
+                                                  <div class="col-md-6 col-sm-6 col-xs-12 form-group has-feedback">
+                                                      <label class="control-label col-md-4 col-sm-4 col-xs-12" for="display-name">{{ trans('Warganegara')}} <label class="text-danger">*</label></label>
+                                                      <div class="col-md-8 col-sm-8 col-xs-12 input-group date">
+                                                          <input type="text" id="warga"  name="warga" placeholder="{{ $geran->warga_negara}}" value="{{ $geran->warga_negara }}" class="form-control" maxlength="55" >
+                                                          @if ($errors->has('warga'))
+                                                          <span class="help-block text-danger" autofocus>
+                                                              <strong>{{ $errors->first('warga') }}</strong>
+                                                          </span>
+                                                          @endif
+                                                      </div>
+                                                  </div>
+
+
+        
+                                              </div>
+                                              <div class="row">
+                                                <div class="col-md-9 col-sm-9 col-xs-12 form-group has-feedback">
+                                                    <label class="control-label col-md-9 col-sm-9 col-xs-12"" for="display-name">{{ trans('Alamat Pemilik')}} <label class="text-danger">*</label></label>
+                                                    <div class="col-md-10 col-sm-10 col-xs-12 input-group date">
+                                                        <textarea rows="5" cols="50" name="alamat" placeholder="{{ $geran->alamat}}" value="{{ $geran->alamat}}" class="form-control" ></textarea>
+                                                        @if ($errors->has('alamat'))
+                                                        <span class="help-block text-danger">
+                                                            <strong>{{ $errors->first('alamat') }}</strong>
+                                                        </span>
+                                                        @endif
+                                                    </div>
+                                                </div>
+                                              </div>
+
+                                      </div>
+                                    </div>
 
                                     <div class="card shadow mb-4">
                                         <div class="card-header py-3">
@@ -418,9 +482,9 @@ Mengemaskini Fail Kes
                                                     <div class="col-md-8 col-sm-8 col-xs-12">
       
                                                         @if (!empty($geran->syarat_kepentingan))
-                                                        <textarea rows="10" cols="50" name="kepentingan" placeholder="{{ $geran->syarat_kepentingan}}" value="{{ $geran->syarat_kepentingan }}" class="form-control" maxlength="25" ></textarea>
+                                                        <textarea rows="10" cols="50" name="kepentingan" placeholder="{{ $geran->syarat_kepentingan}}" value="{{ $geran->syarat_kepentingan }}" class="form-control" ></textarea>
                                                         @else
-                                                        <textarea rows="10" cols="50" name="kepentingan" placeholder="{{ trans('cth:Geran Kod A dan B')}}" value="{{ old('kepentingan') }}" class="form-control" maxlength="25" ></textarea>
+                                                        <textarea rows="10" cols="50" name="kepentingan" placeholder="{{ trans('cth:Geran Kod A dan B')}}" value="{{ old('kepentingan') }}" class="form-control"  ></textarea>
                                                         @endif
       
                                                         @if ($errors->has('kepentingan'))

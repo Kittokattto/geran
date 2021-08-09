@@ -30,6 +30,22 @@ if (!function_exists('getNewUserID')) {
 // 	}
 // }
 
+if (!function_exists('getUserName')) {
+	function getUserName()
+	{	
+		// $data = DB::table('tbl_settings')->where('id','=',$id)->first();
+		$id = Auth::user()->id;
+		$query = DB::table('users')->where('id','=',$id)->first();
+
+		if(!empty($query))
+		{
+			$username = $query->name;
+			return $username;
+		}
+	}
+}
+
+
 if (!function_exists('getNewFileID')) {
 	function getNewFileID()
 	{	
@@ -40,6 +56,104 @@ if (!function_exists('getNewFileID')) {
 		{
 			$id_file = $query->geran_id;
 			return $id_file;
+		}
+	}
+}
+
+
+// calculate time 
+
+if (!function_exists('getDay')) {
+	function getDay($start)
+	{	
+		// $data = DB::table('tbl_settings')->where('id','=',$id)->first();
+		if(strlen($task->tugas) > 50)
+		{
+			$mula = substr($start, 0,40) . '...';
+		}
+		else
+		{ 
+			$mula = $start;
+		}
+		
+			return $mula;
+	
+	}
+}
+
+// check length string to display in list
+
+if (!function_exists('getLength')) {
+	function getLength($start)
+	{	
+		// $data = DB::table('tbl_settings')->where('id','=',$id)->first();
+	
+		if(strlen($start) > 100)
+		{
+			$mula = substr($start, 0,100) . '...';
+		}
+		else
+		{ 
+			$mula = $start;
+		}
+		
+			return $mula;
+	
+	}
+}
+
+
+// check length string to display in list
+
+if (!function_exists('getsmallLength')) {
+	function getsmallLength($start)
+	{	
+		// $data = DB::table('tbl_settings')->where('id','=',$id)->first();
+	
+		if(strlen($start) > 50)
+		{
+			$mula = substr($start, 0,40) . '...';
+		}
+		else
+		{ 
+			$mula = $start;
+		}
+		
+			return $mula;
+	
+	}
+}
+
+if (!function_exists('getssmallLength')) {
+	function getssmallLength($start)
+	{	
+		// $data = DB::table('tbl_settings')->where('id','=',$id)->first();
+	
+		if(strlen($start) > 20)
+		{
+			$mula = substr($start, 0,20) . '...';
+		}
+		else
+		{ 
+			$mula = $start;
+		}
+		
+			return $mula;
+	
+	}
+}
+
+
+//Get New ID from location table to link with geran file
+if (!function_exists('getNewLocationID')) {
+	function getNewLocationID()
+	{	
+		$lokasiID = DB::table('lokasi')->max('id');
+		
+		if(!empty($lokasiID))
+		{
+			
+			return $lokasiID;
 		}
 	}
 }

@@ -4,21 +4,21 @@
 Senarai Pengguna
 @endsection
 @section('search')
-
-<form action="{!! url('/pengguna/search')!!}" method="get" class="d-none d-sm-inline-block shadow-sm">
+@if (getAccessStatusUser()=='yes')
+<form action="{!! url('/pengguna/search')!!}" name="searchForm"   onsubmit="return validateForm()" method="get" class="d-none d-sm-inline-block shadow-sm">
 	<div class="input-group">
 	<select name="type" class="form-control  bg-light border-right-2 ">
-		<option value="" disabled selected hidden>Pilih Jenis Carian...</option>
+		
 		<option value="address">Alamat</option>
 		<option value="department">Jabatan</option>
 		<option value="email">Email</option>
-		<option value="name">Nama</option>
+		<option value="name" selected>Nama</option>
 		<option value="phone">No Telefon</option>
-		<option value="registerBy">Didaftar Oleh</option>
+		
 	</select>
 	<hr>
 	
-	<input type="search" name="search" class="form-control bg-light border-0 small" placeholder="Cari Nama Pengguna..."
+	<input type="search" id="search" name="search" class="form-control bg-light border-0 small" placeholder="Cari Nama Pengguna..."
 		aria-label="Search" aria-describedby="basic-addon2">
 	
 	<div class="input-group-append">
@@ -28,7 +28,7 @@ Senarai Pengguna
 	</div>
 </div>
 </form>
-
+@endif
 {{-- <a href="#" class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm"><i
 	class="fas fa-download fa-sm text-white-50"></i> Generate Report</a> --}}
 @endsection
@@ -58,7 +58,7 @@ Senarai Pengguna
 			</div>
 		<!-- End Modal for Coupon Data -->
         <div class="">
-			@if(session('message'))
+			{{-- @if(session('message'))
 				<div class="row massage">
 					<div class="col-md-12 col-sm-12 col-xs-12">
 						<div class="checkbox checkbox-success checkbox-circle">
@@ -72,7 +72,7 @@ Senarai Pengguna
 						</div>
 					</div>
 				</div>
-			@endif
+			@endif --}}
 			<div class="row" >
 				<div class="col-md-12 col-sm-12 col-xs-12" >
 					<div class="card mb-4 py-3 border-bottom-secondry">
@@ -87,7 +87,16 @@ Senarai Pengguna
 					
 					
 				</div>
-					
+				@if(session('message'))
+				<div class="row message">
+					<div class="col-md-12 col-sm-12 col-xs-12">
+						<div class=" bg-success text-white shadow">
+							<div class="row justify-content-center"> {{session('message')}}  </div>
+						    
+						</div>
+					</div>
+				</div>
+				@endif
 					<?php $userid = Auth::user()->id; ?>
 					<div style="margin:auto;">{{ $user->links() }}</div>
 					
@@ -121,7 +130,7 @@ Senarai Pengguna
                                         <td>{{ $users->address}}</td>
                                         <td>{{ $users->department}}</td>
                                         <td>{{ $users->registerBy}}</td>
-                                        <td>{{ $users->created_at}}</td>
+                                        <td>{{ date('j F Y',strtotime($users->created_at))}}</td>
 										<td>
 
 												<a href="{!! url('/pengguna/show/'.$users->id) !!}"><button type="button" class="btn btn-round btn-info">{{ trans('View') }}</button></a>
@@ -214,6 +223,18 @@ Senarai Pengguna
 // } );
    
   </script>
+<script>
+	function validateForm()
+	{
+		var x = document.forms["searchForm"]["search"].value;
 
+		if (x == null| x == "")
+		{
+		
+			return false;
+		}
+	
+	}
+</script>
 
 @endsection

@@ -44,8 +44,16 @@ class Handler extends ExceptionHandler
      * @param  \Exception  $exception
      * @return \Illuminate\Http\Response
      */
-    public function render($request, Exception $exception)
-    {
-        return parent::render($request, $exception);
-    }
+             public function render($request,Exception $exception)
+            {
+            if ($exception instanceof \Illuminate\Http\Exceptions\PostTooLargeException) {
+                return \Illuminate\Support\Facades\Redirect::back()->withErrors(['max_upload' => 'File is Too Big make sure not Exceed 5mb !']);
+            }
+                return parent::render($request, $exception);
+            }
+
+            protected function showCustomErrorPage()
+            {
+                
+            }
 }

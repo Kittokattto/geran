@@ -5,19 +5,19 @@ Senarai Geran
 @endsection
 @section('search')
 
-<form action="{!! url('/failkes/search')!!}" method="get" class="d-none d-sm-inline-block shadow-sm">
+<form action="{!! url('/failkes/search')!!}" name="searchForm"   onsubmit="return validateForm()" method="get" class="d-none d-sm-inline-block shadow-sm">
 	<div class="input-group">
 		<select name="type" class="form-control  bg-light border-right-2 ">
-			<option value="" disabled selected hidden>Pilih Jenis Carian...</option>
-			<option value="no_hakmilik">No. Hakmilik</option>
+			
+			<option value="no_hakmilik" selected>No. Hakmilik</option>
 			<option value="tajuk_geran">Jenis Hakmilik</option>
 			<option value="daerah">Daerah</option>
 			<option value="no_lot">No. Lot</option>
 			<option value="no_fail">No. Fail</option>
-			<option value="registerBy">Diurus Oleh</option>
+			<option value="pemilik">Pemilik</option>
 		</select>
 		<hr>
-		<input type="search" name="search" class="form-control bg-light border-0 small" placeholder="Cari No Hakmilik"
+		<input type="search" id="search" name="search" class="form-control bg-light border-0 small" placeholder="Cari No Hakmilik"
 			aria-label="Search" aria-describedby="basic-addon2">
 		<div class="input-group-append">
 			<button class="btn btn-primary" type="submit">
@@ -97,7 +97,7 @@ Senarai Geran
 									<th>{{ trans('Jenis Hakmilik')}}</th>
 									<th>{{ trans('Pemilik')}}</th>
                                     <th>{{ trans('Bandar/Pekan/Mukim')}}</th>
-                                    <th>{{ trans('Tempat')}}</th>
+                                    
 									<th>{{ trans('No.Lot')}}</th> 
                                     <th>{{ trans('No.Fail')}}</th>
 									<th>{{ trans('Diurus Oleh')}}</th>
@@ -113,7 +113,7 @@ Senarai Geran
 										<td>{{ $gerans->tajuk_geran}}</td>
                                         <td>{{ $gerans->pemilik}}</td>
                                         <td>{{ $gerans->daerah}}</td>
-                                        <td>{{ $gerans->tempat}}</td>
+                                        
                                         <td>{{ $gerans->no_lot}}</td>
 										<td>{{ $gerans->no_fail}}</td>
                                         <td>{{ $gerans->registerby->name}}</td>
@@ -208,6 +208,19 @@ Senarai Geran
 // } );
    
   </script>
+  <script>
+	function validateForm()
+	{
+		var x = document.forms["searchForm"]["search"].value;
+
+		if (x == null| x == "")
+		{
+		
+			return false;
+		}
+	
+	}
+</script>
 
 
 @endsection

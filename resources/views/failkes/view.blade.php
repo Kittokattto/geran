@@ -144,6 +144,28 @@ Tambah Fail Kes
 
                         <div class="card shadow mb-4">
                             <div class="card-header py-3">
+                            <h6 class="m-0 font-weight-bold text-primary">Rekod Ketuanpunyaan</h6>
+                            </div>
+                        <div class="card-body">
+                            <div class="row">
+                                <div class="col-md-8 col-sm-8 col-xs-8 form-group">
+                                    
+                                        
+                                        <label class="control-label col-sm-5" for="first-name">{{ trans('Nama Pemilik') }} </label> </label> : <label class="control-label col-sm-6" for="first-name">{{ $geran->pemilik }} </label><br>
+                                        <label class="control-label col-sm-5" for="first-name">{{ trans('No Kad Pengenalan') }}</label>   </label> : <label class="control-label col-sm-6" for="first-name">{{ $geran->ic }} </label><br>
+                                        <label class="control-label col-sm-5" for="first-name">{{ trans('Warganegara') }}  </label> </label> : <label class="control-label col-sm-6" for="first-name">{{ $geran->warga_negara }} </label><br>
+                                    
+                                    <label class="control-label col-sm-5" for="first-name">{{ trans('Alamat') }}</label>   </label> : <label class="control-label col-sm-6" for="first-name">{{ $geran->alamat }} </label><br>
+                                    
+
+                                       
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                        <div class="card shadow mb-4">
+                            <div class="card-header py-3">
                             <h6 class="m-0 font-weight-bold text-primary">Syarat-Syarat Khas Mengenai {{ $geran->tajuk_geran}}</h6>
                             </div>
                         <div class="card-body">
@@ -173,7 +195,7 @@ Tambah Fail Kes
 
                     <div class="card shadow mb-4">
                         <div class="card-header py-3">
-                        <h6 class="m-0 font-weight-bold text-primary">Syarat-Syarat Khas Mengenai {{ $geran->tajuk_geran}}</h6>
+                        <h6 class="m-0 font-weight-bold text-primary">Gambar Pelan {{ $geran->tajuk_geran}}</h6>
                         </div>
                     <div class="card-body">
                         <div class="row">
@@ -210,7 +232,7 @@ Tambah Fail Kes
             // var url = $('this').attr('bookmarkurl');
             if ( x == true)
             {
-                document.getElementById("dgg").style.display = "block";
+                document.getElementById("dgg").style.display = "none";
                
                 $.ajax({         
                             headers: {
@@ -221,7 +243,7 @@ Tambah Fail Kes
                             data:{ geran_id:geran_id },
                             success:function(response)
                             {
-                                alert("Set as Bookmark");
+                                alert("Remove from Bookmark");
                             },
 
                     });
@@ -240,7 +262,7 @@ Tambah Fail Kes
                             data:{geran_id:geran_id},
                             success:function(response)
                             {
-                                alert("Remove from Bookmark");
+                                alert("Set as Bookmark");
                             },
 
                     });

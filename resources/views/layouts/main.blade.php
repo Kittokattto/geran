@@ -7,7 +7,7 @@
  
             <!-- CSRF Token -->
 	<meta name="csrf-token" content="{{ csrf_token() }}">
-        <title>Collapsible sidebar using Bootstrap 3</title>
+        <title>Pengurusan Geran Tanah</title>
 
          <!-- Bootstrap CSS CDN -->
          {{-- <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"> --}}
@@ -17,7 +17,19 @@
         
        
         <link href="https://cdn.jsdelivr.net/gh/gitbrent/bootstrap4-toggle@3.6.1/css/bootstrap4-toggle.min.css" rel="stylesheet">
+        <!-- Full Calender -->
+        <link rel="stylesheet" href=" {{ URL::asset('css/main.min.css')}}">
+        <script src="{{ URL::asset('js/main.min.js') }}"></script>
         
+        {{-- <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/fullcalendar/3.9.0/fullcalendar.css" />
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.24.0/moment.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/fullcalendar/3.9.0/fullcalendar.js"></script> --}}
+
+
+          {{-- <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/fullcalendar/3.9.0/fullcalendar.css" /> --}}
+          {{-- <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.24.0/moment.min.js"></script> --}}
+          {{-- <script src="https://cdnjs.cloudflare.com/ajax/libs/fullcalendar/3.9.0/fullcalendar.js"></script> --}}
+
         
         <!-- Our Custom CSS -->
         {{-- <link rel="stylesheet" href=" {{ URL::asset('css/style.css')}}"> --}}
@@ -25,6 +37,9 @@
         <link rel="stylesheet" href=" {{ URL::asset('css/user-list.css')}}">
         <link rel="stylesheet" href=" {{ URL::asset('css/sb-admin-2.min.css')}}">
         <link rel="stylesheet" href=" {{ URL::asset('scss/tab.scss')}}">
+        <link rel="stylesheet" href=" {{ URL::asset('css/task.css')}}">
+        <link rel="stylesheet" href=" {{ URL::asset('css/profile.css')}}">
+        <link rel="stylesheet" href=" {{ URL::asset('css/table.css')}}">
         {{-- <link rel="stylesheet" href=" {{ URL::asset('css/bootstrapmin.css')}}"> --}}
 
 
@@ -35,7 +50,7 @@
         <link rel="stylesheet" href=" {{ URL::asset('css/fontawesome.min.css')}}">
         
         <!-- Sweet Alert -->
-        
+
     </head>
     <body id="page-top">
 
@@ -52,7 +67,7 @@
                     <div class="sidebar-brand-icon rotate-n-15">
                       
                     </div>
-                    <div class="sidebar-brand-text mx-3">Portal Carian Fail</div>
+                    <div class="sidebar-brand-text mx-3"><h4>Portal</h4> <h6>Pengurusan Fail</h6></div>
                 </a>
     
                 <!-- Divider -->
@@ -176,12 +191,22 @@
                 </li>
                 <!-- Nav Item - Access -->
                 <li class="nav-item">
+                    <a class="nav-link" href="{!! url('/tugas/senarai') !!}">
+                        <i class="fas fa-fw fa-paperclip"></i>
+                        <span>Pembahagian Tugas</span></a>
+                </li>
+                <!-- Nav Item - Access -->
+                <li class="nav-item">
+                    <a class="nav-link" href="{!! url('/user/profile') !!}">
+                        <i class="fas fa-fw fa-cog"></i>
+                        <span>Tetapan</span></a>
+                </li>
+                <!-- Nav Item - Charts -->
+                <li class="nav-item">
                     <a class="nav-link" href="{!! url('/access/senarai') !!}">
                         <i class="fas fa-fw fa-table"></i>
                         <span>Akses</span></a>
                 </li>
-                <!-- Nav Item - Charts -->
-                
     
                 
     
@@ -270,7 +295,7 @@
                             </li>
     
                             <!-- Nav Item - Alerts -->
-                            <li class="nav-item dropdown no-arrow mx-1">
+                            {{-- <li class="nav-item dropdown no-arrow mx-1">
                                 <a class="nav-link dropdown-toggle" href="#" id="alertsDropdown" role="button"
                                     data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                     <i class="fas fa-bell fa-fw"></i>
@@ -319,78 +344,14 @@
                                     <a class="dropdown-item text-center small text-gray-500" href="#">Show All Alerts</a>
                                 </div>
                             </li>
-    
+     --}}
                             <!-- Nav Item - Messages -->
-                            <li class="nav-item dropdown no-arrow mx-1">
-                                <a class="nav-link dropdown-toggle" href="#" id="messagesDropdown" role="button"
-                                    data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                    <i class="fas fa-envelope fa-fw"></i>
-                                    <!-- Counter - Messages -->
-                                    <span class="badge badge-danger badge-counter">7</span>
-                                </a>
-                                <!-- Dropdown - Messages -->
-                                <div class="dropdown-list dropdown-menu dropdown-menu-right shadow animated--grow-in"
-                                    aria-labelledby="messagesDropdown">
-                                    <h6 class="dropdown-header">
-                                        Message Center
-                                    </h6>
-                                    <a class="dropdown-item d-flex align-items-center" href="#">
-                                        <div class="dropdown-list-image mr-3">
-                                            {{-- <img class="rounded-circle" src="img/undraw_profile_1.svg"
-                                                alt=""> --}}
-                                            <div class="status-indicator bg-success"></div>
-                                        </div>
-                                        <div class="font-weight-bold">
-                                            <div class="text-truncate">Hi there! I am wondering if you can help me with a
-                                                problem I've been having.</div>
-                                            <div class="small text-gray-500">Emily Fowler · 58m</div>
-                                        </div>
-                                    </a>
-                                    <a class="dropdown-item d-flex align-items-center" href="#">
-                                        <div class="dropdown-list-image mr-3">
-                                            {{-- <img class="rounded-circle" src="img/undraw_profile_2.svg"
-                                                alt=""> --}}
-                                            <div class="status-indicator"></div>
-                                        </div>
-                                        <div>
-                                            <div class="text-truncate">I have the photos that you ordered last month, how
-                                                would you like them sent to you?</div>
-                                            <div class="small text-gray-500">Jae Chun · 1d</div>
-                                        </div>
-                                    </a>
-                                    <a class="dropdown-item d-flex align-items-center" href="#">
-                                        <div class="dropdown-list-image mr-3">
-                                            {{-- <img class="rounded-circle" src="img/undraw_profile_3.svg"
-                                                alt=""> --}}
-                                            <div class="status-indicator bg-warning"></div>
-                                        </div>
-                                        <div>
-                                            <div class="text-truncate">Last month's report looks great, I am very happy with
-                                                the progress so far, keep up the good work!</div>
-                                            <div class="small text-gray-500">Morgan Alvarez · 2d</div>
-                                        </div>
-                                    </a>
-                                    <a class="dropdown-item d-flex align-items-center" href="#">
-                                        <div class="dropdown-list-image mr-3">
-                                            <img class="rounded-circle" src="https://source.unsplash.com/Mv9hjnEUHR4/60x60"
-                                                alt="">
-                                            <div class="status-indicator bg-success"></div>
-                                        </div>
-                                        <div>
-                                            <div class="text-truncate">Am I a good boy? The reason I ask is because someone
-                                                told me that people say this to all dogs, even if they aren't good...</div>
-                                            <div class="small text-gray-500">Chicken the Dog · 2w</div>
-                                        </div>
-                                    </a>
-                                    <a class="dropdown-item text-center small text-gray-500" href="#">Read More Messages</a>
-                                </div>
-                            </li>
-    
+                            
                             <div class="topbar-divider d-none d-sm-block"></div>
     
                             <!-- Nav Item - User Information -->
                             <li class="nav-item dropdown no-arrow">
-                                <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button"
+                                <a class="nav-link dropdown-toggle" id="userDropdown" role="button"
                                     data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                     <span class="mr-2 d-none d-lg-inline text-gray-600 small">{{ Auth::user()->name }} <span class="caret"></span></span>
                                     {{-- <img class="img-profile rounded-circle"
@@ -399,17 +360,17 @@
                                 <!-- Dropdown - User Information -->
                                 <div class="dropdown-menu dropdown-menu-right shadow animated--grow-in"
                                     aria-labelledby="userDropdown">
-                                    <a class="dropdown-item" href="#">
+                                    <a class="dropdown-item" href="{!! url('/user/profile')!!}">
                                         <i class="fas fa-user fa-sm fa-fw mr-2 text-gray-400"></i>
                                         Profile
                                     </a>
-                                    <a class="dropdown-item" href="#">
+                                    <a class="dropdown-item" href="{!! url('/user/setting/'.Auth::user()->id )!!}">
                                         <i class="fas fa-cogs fa-sm fa-fw mr-2 text-gray-400"></i>
-                                        Settings
+                                        Tetapan
                                     </a>
-                                    <a class="dropdown-item" href="#">
+                                    <a class="dropdown-item" href="{!! url('/tugas/senarai')!!}">
                                         <i class="fas fa-list fa-sm fa-fw mr-2 text-gray-400"></i>
-                                        Activity Log
+                                        Tugasan
                                     </a>
                                     <div class="dropdown-divider"></div>
                                     <a class="dropdown-item" href="{{ route('logout') }}"data-toggle="modal" data-target="#logoutModal" onclick="event.preventDefault();
@@ -453,7 +414,7 @@
                 <footer class="sticky-footer bg-white">
                     <div class="container my-auto">
                         <div class="copyright text-center my-auto">
-                            <span>Copyright &copy; Your Website 2020</span>
+                            <span>Pengurusan Geran Tanah &copy; Johor</span>
                         </div>
                     </div>
                 </footer>
@@ -494,20 +455,7 @@
 
 
 
-        {{-- <!-- jQuery CDN -->
-        
-         <script src="https://code.jquery.com/jquery-1.12.0.min.js"></script>
-         <!-- Bootstrap Js CDN -->
-         <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 
-         <script type="text/javascript">
-             $(document).ready(function () {
-                 $('#sidebarCollapse').on('click', function () {
-                     $('#sidebar').toggleClass('active');
-                     $(this).toggleClass('active');
-                 });
-             });
-         </script> --}}
              <!-- Bootstrap core JavaScript-->
              <script src="https://code.jquery.com/jquery-1.12.0.min.js"></script>
             <script src="https://cdn.jsdelivr.net/npm/sweetalert2@10"></script>
@@ -523,10 +471,13 @@
             <script src="{{ URL::asset('js/sb-admin-2.min.js') }}"></script>
 
             <!-- Page level plugins -->
-            <script src="{{ URL::asset('vendor/chart.js/Chart.min.js') }}"></script>
+            {{-- <script src="{{ URL::asset('vendor/chart.js/Chart.min.js') }}"></script> --}}
 
             <!-- Page level custom scripts -->
-            <script src="{{ URL::asset('js/demo/chart-area-demo.js') }}"></script>
-            <script src="{{ URL::asset('js/demo/chart-pie-demo.js') }}"></script>
+            {{-- <script src="{{ URL::asset('js/demo/chart-area-demo.js') }}"></script>
+            <script src="{{ URL::asset('js/demo/chart-pie-demo.js') }}"></script> --}}
+
+            <!-- Full Calendar -->
+
     </body>
 </html>

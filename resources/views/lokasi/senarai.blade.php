@@ -5,20 +5,20 @@ Senarai Lokasi Fail Kes
 @endsection
 @section('search')
 
-<form action="{!! url('/failkes/search')!!}" method="get" class="d-none d-sm-inline-block shadow-sm">
+<form action="{!! url('/failkes/search')!!}"  name="searchForm"   onsubmit="return validateForm()"method="get" class="d-none d-sm-inline-block shadow-sm">
 <div class="input-group">
 	<select name="type" id class="form-control  bg-light border-right-2 ">
-		<option value="" disabled selected hidden>Pilih Jenis Carian...</option>
-		<option value="jenis_file">Jenis Fail</option>
+		{{-- <option value="" disabled selected hidden>Pilih Jenis Carian...</option> --}}
+		<option value="jenis_file" selected>Jenis Fail</option>
 		<option value="tajuk_file">Tajuk Fail</option>
 		<option value="status">Status</option>
 		<option value="lokasi">Lokasi</option>
 		{{-- <option value="created_at">Tarikh Detempatkan</option> --}}
-		<option value="id_user">Ditempatkan Oleh</option>
+		{{-- <option value="id_user">Ditempatkan Oleh</option> --}}
 	</select>
 
 	<hr>
-	<input type="search" name="search"class="form-control bg-light border-0 small" placeholder="Cari Tajuk Fail..."
+	<input type="search" id="search" name="search"class="form-control bg-light border-0 small" placeholder="Cari Tajuk Fail..."
 		aria-label="Search" aria-describedby="basic-addon2">
 	<div class="input-group-append">
 		<button class="btn btn-primary" type="submit">
@@ -36,7 +36,7 @@ Senarai Lokasi Fail Kes
 
 
 
-@if (getAccessStatusUser()=='yes')
+
 <!-- page content -->
 	<div class="right_col" role="main">
         <div id="myModal" class="modal fade" role="dialog">
@@ -57,21 +57,21 @@ Senarai Lokasi Fail Kes
 			</div>
 		<!-- End Modal for Coupon Data -->
         <div class="">
-			@if(session('message'))
+			{{-- @if(session('message'))
 				<div class="row massage">
 					<div class="col-md-12 col-sm-12 col-xs-12">
 						<div class="checkbox checkbox-success checkbox-circle">
 							@if(session('message') == 'Successfully Submitted')
 							<label for="checkbox-10 colo_success"> {{trans('Successfully Submitted')}}  </label>
 						   @elseif(session('message')=='Successfully Updated')
-						   <label for="checkbox-10 colo_success"> {{ trans('app.Successfully Updated')}}  </label>
+						   <label for="checkbox-10 colo_success"> {{ trans('Successfully Updated')}}  </label>
 						   @elseif(session('message')=='Successfully Deleted')
-						   <label for="checkbox-10 colo_success"> {{ trans('app.Successfully Deleted')}}  </label>
+						   <label for="checkbox-10 colo_success"> {{ trans('Successfully Deleted')}}  </label>
 						   @endif
 						</div>
 					</div>
 				</div>
-			@endif
+			@endif --}}
 			<div class="row" >
 				<div class="col-md-12 col-sm-12 col-xs-12" >
 					<div class="card mb-4 py-3 border-bottom-secondry">
@@ -86,7 +86,16 @@ Senarai Lokasi Fail Kes
 					
 					
 				</div>
-					
+				@if(session('message'))
+				<div class="row message">
+					<div class="col-md-12 col-sm-12 col-xs-12">
+						<div class=" bg-success text-white shadow">
+							<div class="row justify-content-center"> {{session('message')}}  </div>
+						    
+						</div>
+					</div>
+				</div>
+				@endif
 					<?php $userid = Auth::user()->id; ?>
 					<div style="margin:auto;">{{ $lokasi->links() }}</div>
 					
@@ -100,7 +109,7 @@ Senarai Lokasi Fail Kes
 
 									<th>{{ trans('Jenis Fail')}}</th>
 									<th>{{ trans('Tajuk Fail')}}</th>
-									<th>{{ trans('No Hakmilik')}}</th>
+									
                                     <th>{{ trans('Lokasi')}}</th>
 									<th>{{ trans('Status')}}</th>
 									<th>{{ trans('Jumlah Salinan')}}</th> 
@@ -118,7 +127,7 @@ Senarai Lokasi Fail Kes
 										<td>{{ $i }}</td>
 										<td>{{ $lokasis->jenis_file}}</td>
 										<td>{{ $lokasis->tajuk_file}}</td>
-										<td>{{ $lokasis->no_hakmilik}}</td>
+										
 										<td>{{ $lokasis->lokasi}}</td>
 										<td>{{ $lokasis->status}}</td>
                                         <td>{{ $lokasis->copy}}</td>
@@ -147,15 +156,7 @@ Senarai Lokasi Fail Kes
 		</div>
 	</div>
 
-	@else
-	<div class="right_col" role="main">
-		<div class="nav_menu main_title" style="margin-top:4px;margin-bottom:15px;">
-            <div class="nav toggle" style="padding-bottom:16px;">
-				<span class="titleup">&nbsp {{ trans('You are not authorize this page.')}}</span>
-            </div>
-		</div>
-	</div>
-	@endif
+
 
 
 
@@ -217,6 +218,18 @@ Senarai Lokasi Fail Kes
 // } );
    
   </script>
+<script>
+	function validateForm()
+	{
+		var x = document.forms["searchForm"]["search"].value;
 
+		if (x == null| x == "")
+		{
+		
+			return false;
+		}
+	
+	}
+</script>
 
 @endsection

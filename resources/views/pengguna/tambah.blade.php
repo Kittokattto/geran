@@ -8,7 +8,7 @@ Tambah Pengguna
 
 
 
-
+@if (getAccessStatusUser()=='yes')
 <!-- page content -->
 	<div class="right_col" role="main">
         <div id="myModal" class="modal fade" role="dialog">
@@ -190,6 +190,15 @@ Tambah Pengguna
 			</div>
 		</div>
 	</div>  
+    @else
+	<div class="right_col" role="main">
+		<div class="nav_menu main_title" style="margin-top:4px;margin-bottom:15px;">
+            <div class="nav toggle" style="padding-bottom:16px;">
+				<span class="titleup">&nbsp {{ trans('You are not authorize this page.')}}</span>
+            </div>
+		</div>
+	</div>
+	@endif
 
 
 @endsection

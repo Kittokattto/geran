@@ -45,6 +45,11 @@ Tambah Fail Kes
                         </nav>                    
                     </div>
                     
+                    <div class="linklocation">
+                        <span class="tutupbtn" onclick="this.parentElement.style.display='none';">&times;</span> 
+                        <strong>Untuk mengemaskini maklumat fail perlu ke senarai geran !</strong>
+                        
+                      </div>
                     <div class="row justify-content-center">
                         <div class="col-md-10">
                     <div class="col-md-12 col-sm-12 col-xs-12">
@@ -157,7 +162,7 @@ Tambah Fail Kes
                                         </div>
 
 
-                                        <div class="card shadow mb-4">
+                                        {{-- <div class="card shadow mb-4">
                                             <div class="card-header py-3">
                                                 <h6 class="m-0 font-weight-bold text-primary">Maklumat Ringkas Fail</h6>
                                                 <div class="text-black-50 small">Tidak Wajib</div>
@@ -259,7 +264,7 @@ Tambah Fail Kes
           
                                                 </div>       
                                             </div>
-                                        </div>
+                                        </div> --}}
                                    
 
                                 

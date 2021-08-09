@@ -79,7 +79,7 @@ Tambah Fail Kes
                                                     <div class="col-md-6 col-sm-6 col-xs-12 form-group has-feedback ">
                                                         <label class="control-label col-md-4 col-sm-4 col-xs-12" for="first-name">{{ trans('Jenis Fail') }} </label>
                                                         <div class="col-md-8 col-sm-8 col-xs-12">
-                                                          <input type="text" id="jenis" name="jenis"  class="form-control "  value="{{ old('jenis') }}"  maxlength="25"  />
+                                                          <input type="text" id="jenis" name="jenis"  class="form-control "  value="{{ old('jenis') }}"  maxlength="50"  />
 
                                                         </div>
                                                     </div>
@@ -90,36 +90,10 @@ Tambah Fail Kes
                                                     <div class="col-md-6 col-sm-6 col-xs-12 form-group has-feedback ">
                                                         <label class="control-label col-md-4 col-sm-4 col-xs-12" for="display-name">{{ trans('Lokasi Fail')}} <label class="text-danger">*</label></label>
                                                         <div class="col-md-8 col-sm-8 col-xs-12">
-                                                            <input type="text"  name="lokasi" value="{{ old('lokasi') }}" class="form-control" maxlength="25" >
+                                                            <input type="text"  name="lokasi" value="{{ old('lokasi') }}" class="form-control" maxlength="55" >
                                                             @if ($errors->has('lokasi'))
                                                             <span class="help-block text-danger">
                                                                 <strong>{{ $errors->first('lokasi') }}</strong>
-                                                            </span>
-                                                            @endif
-                                                        </div>
-                                                    </div>
-            
-                                                    <div class="col-md-6 col-sm-6 col-xs-12 form-group has-feedback ">
-                                                        <label class="control-label col-md-4 col-sm-4 col-xs-12" for="display-name">{{ trans('Kod Fail')}} </label>
-                                                        <div class="col-md-8 col-sm-8 col-xs-12">
-                                                            <input type="text"  name="kod" placeholder="{{ trans('')}}" value="{{ old('kod') }}" class="form-control" maxlength="150" >
-                                                            {{-- @if ($errors->has('kod'))
-                                                            <span class="help-block text-danger">
-                                                                <strong>{{ $errors->first('kod') }}</strong>
-                                                            </span>
-                                                            @endif --}}
-                                                        </div>
-                                                    </div> 
-                                                </div>
-            
-                                                <div class="row">
-                                                    <div class="col-md-6 col-sm-6 col-xs-12 form-group has-feedback ">
-                                                        <label class="control-label col-md-4 col-sm-4 col-xs-12" for="display-name">{{ trans('Jumlah Salinan')}} <label class="text-danger">*</label></label>
-                                                        <div class="col-md-8 col-sm-8 col-xs-12">
-                                                            <input type="text"  name="copy" placeholder="{{ trans('')}}" value="{{ old('copy') }}" class="form-control" maxlength="25" >
-                                                            @if ($errors->has('copy'))
-                                                            <span class="help-block text-danger">
-                                                                <strong>{{ $errors->first('copy') }}</strong>
                                                             </span>
                                                             @endif
                                                         </div>
@@ -139,6 +113,17 @@ Tambah Fail Kes
                                                 </div>
             
                                                 <div class="row">
+                                                    <div class="col-md-6 col-sm-6 col-xs-12 form-group has-feedback ">
+                                                        <label class="control-label col-md-4 col-sm-4 col-xs-12" for="display-name">{{ trans('Jumlah Salinan')}} <label class="text-danger">*</label></label>
+                                                        <div class="col-md-8 col-sm-8 col-xs-12">
+                                                            <input type="text"  name="copy" placeholder="{{ trans('')}}" value="{{ old('copy') }}" class="form-control" maxlength="25" >
+                                                            @if ($errors->has('copy'))
+                                                            <span class="help-block text-danger">
+                                                                <strong>{{ $errors->first('copy') }}</strong>
+                                                            </span>
+                                                            @endif
+                                                        </div>
+                                                    </div>
                                                     <div class="col-md-6 col-sm-6 col-xs-12 form-group has-feedback   ">
                                                         <label class="control-label col-md-4 col-sm-4 col-xs-12" for="display-name">{{ trans('Tarikh Disimpan')}}  <label class="text-danger">*</label>  </label>
                                                         <div class="col-md-8 col-sm-8 col-xs-12">
@@ -150,8 +135,10 @@ Tambah Fail Kes
                                                             @endif
                                                         </div>
                                                     </div>
-                                                    
-                                                </div> 
+            
+
+                                                </div>
+            
                                             </div>
                                         </div>
 
@@ -159,30 +146,29 @@ Tambah Fail Kes
                                         <div class="card shadow mb-4">
                                             <div class="card-header py-3">
                                                 <h6 class="m-0 font-weight-bold text-primary">Maklumat Ringkas Fail</h6>
-                                                <div class="text-black-50 small">Tidak Wajib</div>
                                             </div>
                                             <div class="card-body">
                                                 <div class="row">
                                                  
-                                                    <div class="col-md-6 col-sm-6 col-xs-12 form-group has-feedback ">
-                                                        <label class="control-label col-md-4 col-sm-4 col-xs-12" for="first-name">{{ trans('Nama Pemilik') }}</label>
+                                                    <div class="col-md-6 col-sm-6 col-xs-12 form-group has-feedback  ">
+                                                        <label class="control-label col-md-4 col-sm-4 col-xs-12" for="first-name">{{ trans('No. Hakmilik Fail') }} <label class="text-danger">*</label>  </label>
                                                         <div class="col-md-8 col-sm-8 col-xs-12">
-                                                          <input type="text" id="pemilik" name="pemilik"  class="form-control" value="{{ old('pemilik') }}" maxlength="25" />
-                                                          @if ($errors->has('pemilik'))
+                                                          <input type="text" id="no_hakmilik" name="no_hakmilik" placeholder="{{ trans('No. Hakmilik')}}"  class="form-control"  value="{{ old('no_hakmilik') }}"  maxlength="25"  />
+                                                          @if ($errors->has('no_hakmilik'))
                                                            <span class="help-block text-danger">
-                                                               <strong>{{ $errors->first('pemilik') }}</strong>
+                                                               <strong>{{ $errors->first('no_hakmilik') }}</strong>
                                                            </span>
                                                          @endif
                                                         </div>
                                                     </div>
-                  
-                                                    <div class="col-md-6 col-sm-6 col-xs-12 form-group has-feedback  ">
-                                                        <label class="control-label col-md-4 col-sm-4 col-xs-12" for="first-name">{{ trans('No. Hakmilik Fail') }}  </label>
+
+                                                    <div class="col-md-6 col-sm-6 col-xs-12 form-group has-feedback ">
+                                                        <label class="control-label col-md-4 col-sm-4 col-xs-12" for="first-name">{{ trans('No K/P Pemilik') }}</label>
                                                         <div class="col-md-8 col-sm-8 col-xs-12">
-                                                          <input type="text" id="no_hakmilik" name="no_hakmilik"  class="form-control v"  value="{{ old('no_hakmilik') }}"  maxlength="25"  />
-                                                          @if ($errors->has('no_hakmilik'))
+                                                          <input type="text" id="ic" name="ic"  placeholder="{{ trans('cth:890302-01-****')}}" class="form-control" value="{{ old('ic') }}" />
+                                                          @if ($errors->has('ic'))
                                                            <span class="help-block text-danger">
-                                                               <strong>{{ $errors->first('no_hakmilik') }}</strong>
+                                                               <strong>{{ $errors->first('ic') }}</strong>
                                                            </span>
                                                          @endif
                                                         </div>
@@ -194,7 +180,7 @@ Tambah Fail Kes
                                                     <div class="col-md-6 col-sm-6 col-xs-12 form-group has-feedback  ">
                                                         <label class="control-label col-md-4 col-sm-4 col-xs-12" for="display-name">{{ trans('Negeri')}} </label>
                                                         <div class="col-md-8 col-sm-8 col-xs-12">
-                                                            <input type="text"  name="negeri" placeholder="{{ trans('')}}" value="{{ old('negeri') }}" class="form-control" maxlength="25">
+                                                            <input type="text"  name="negeri" placeholder="{{ trans('Negeri')}}" value="{{ old('negeri') }}" class="form-control" maxlength="25">
                                                             @if ($errors->has('negeri'))
                                                             <span class="help-block text-danger">
                                                                 <strong>{{ $errors->first('negeri') }}</strong>
@@ -206,7 +192,7 @@ Tambah Fail Kes
                                                     <div class="col-md-6 col-sm-6 col-xs-12 form-group has-feedback ">
                                                         <label class="control-label col-md-4 col-sm-4 col-xs-12" for="display-name">{{ trans('Daerah')}} </label>
                                                         <div class="col-md-8 col-sm-8 col-xs-12">
-                                                            <input type="text"  name="daerah" value="{{ old('daerah') }}" class="form-control" maxlength="25">
+                                                            <input type="text"  name="daerah" placeholder="{{ trans('Daerah')}}" value="{{ old('daerah') }}" class="form-control" maxlength="25">
                                                             @if ($errors->has('daerah'))
                                                             <span class="help-block text-danger">
                                                                 <strong>{{ $errors->first('daerah') }}</strong>
@@ -221,7 +207,7 @@ Tambah Fail Kes
                                                     <div class="col-md-6 col-sm-6 col-xs-12 form-group has-feedback ">
                                                         <label class="control-label col-md-4 col-sm-4 col-xs-12" for="display-name">{{ trans('Lot Tanah')}}</label>
                                                         <div class="col-md-8 col-sm-8 col-xs-12">
-                                                            <input type="text"  name="lot" placeholder="{{ trans('')}}" value="{{ old('lot') }}" class="form-control" maxlength="150" >
+                                                            <input type="text"  name="lot" placeholder="{{ trans('No. Lot')}}" value="{{ old('lot') }}" class="form-control" maxlength="" >
                                                             @if ($errors->has('lot'))
                                                             <span class="help-block text-danger">
                                                                 <strong>{{ $errors->first('lot') }}</strong>
@@ -230,27 +216,30 @@ Tambah Fail Kes
                                                         </div>
                                                     </div> 
             
-                                                    <div class="col-md-6 col-sm-6 col-xs-12 form-group has-feedback  ">
-                                                        <label class="control-label col-md-4 col-sm-4 col-xs-12" for="display-name">{{ trans('Tempat')}}</label>
-                                                        <div class="col-md-8 col-sm-8 col-xs-12">
-                                                            <input type="text"  name="tempat" placeholder="{{ trans('')}}" value="{{ old('tempat') }}" class="form-control" maxlength="25" >
-                                                            @if ($errors->has('tempat'))
-                                                            <span class="help-block text-danger">
-                                                                <strong>{{ $errors->first('tempat') }}</strong>
-                                                            </span>
-                                                            @endif
-                                                        </div>
-                                                    </div> 
+
                                                 </div>
         
                                                 <div class="row">  
-                                                    <div class="col-md-9 col-sm-9 col-xs-12 form-group has-feedback ">
-                                                        <label class="control-label col-md-9 col-sm-9 col-xs-12" for="display-name">{{ trans('Info Fail')}} </label>
-                                                        <div class="col-md-10 col-sm-10 col-xs-12">
-                                                            <textarea rows="10" cols="50" name="info" placeholder="{{ trans('')}}" value="{{ old('info') }}" class="form-control" maxlength="200" ></textarea>
-                                                            @if ($errors->has('info'))
+
+                                                    <div class="col-md-6 col-sm-6 col-xs-12 form-group has-feedback ">
+                                                        <label class="control-label col-md-4 col-sm-4 col-xs-12" for="display-name">{{ trans('No. Lembaran Piawai')}} </label>
+                                                        <div class="col-md-8 col-sm-8 col-xs-12">
+                                                            <input type="text"  name="no_lembaran" placeholder="{{ trans('No. Lembaran Piawai')}}" value="{{ old('no_lembaran') }}" class="form-control" maxlength="25" >
+                                                            @if ($errors->has('no_lembaran'))
+                                                            <span class="help-block text-danger" autofocus>
+                                                                <strong>{{ $errors->first('no_lembaran') }}</strong>
+                                                            </span>
+                                                            @endif
+                                                        </div>
+                                                    </div>
+
+                                                    <div class="col-md-6 col-sm-6 col-xs-12 form-group has-feedback ">
+                                                        <label class="control-label col-md-4 col-sm-4 col-xs-12" for="display-name">{{ trans('No. Fail')}} </label>
+                                                        <div class="col-md-8 col-sm-8 col-xs-12">
+                                                            <input type="text"  name="no_fail" placeholder="{{ trans('No. Fail')}}" value="{{ old('no_fail') }}" class="form-control" maxlength="105" >
+                                                            @if ($errors->has('no_fail'))
                                                             <span class="help-block text-danger">
-                                                                <strong>{{ $errors->first('info') }}</strong>
+                                                                <strong>{{ $errors->first('no_fail') }}</strong>
                                                             </span>
                                                             @endif
                                                         </div>
@@ -265,7 +254,7 @@ Tambah Fail Kes
                                     <div class="form-group col-md-12 col-sm-12 col-xs-12">
                                         <div class="col-md-12 col-sm-12 col-xs-12 text-center">
                                             <a class="btn btn-danger" href="{{ URL::previous() }}">{{ trans('Cancel')}}</a>
-                                            <button type="submit" class="btn btn-success customerAddSubmitButton">{{ trans('Submit')}}</button>
+                                            <button type="submit" class="btn btn-success customerAddSubmitButton">{{ trans('Continue')}}</button>
                                         </div>
                                     </div>
                                 </form>

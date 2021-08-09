@@ -1,7 +1,7 @@
 @extends('layouts.main')
 
 @section('title')
-Senarai Pengguna
+Senarai Akses
 @endsection
 @section('content')
 

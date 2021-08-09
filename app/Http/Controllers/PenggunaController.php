@@ -6,8 +6,13 @@ namespace App\Http\Controllers;
 use Auth;
 use App\Http\Requests;
 use Illuminate\Http\Request;
+use App\Mail\WelcomeMail;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Foundation\Auth\RegistersUsers;
+use Illuminate\Support\Facades\Mail;
+
+use App\Socmed;
+use App\Tugas;
 use App\User;
 
 class PenggunaController extends Controller
@@ -27,7 +32,7 @@ class PenggunaController extends Controller
         
 		$user = User::orderBy('created_at','desc')->where('soft_delete', '=', 0)->paginate(20);
 		
-
+        
 		return view('pengguna.senarai',compact('user')); 
     }
 
@@ -69,6 +74,12 @@ class PenggunaController extends Controller
         return view('/pengguna/tambah');
     }
 
+    public function picture()
+    {
+        //
+        return view('/pengguna/tambah');
+    }
+
     /**
      * Show the form for creating a new resource.
      *
@@ -99,14 +110,15 @@ class PenggunaController extends Controller
     
     public function store(Request $request)
     {
-        $userid = Auth::user()->id;
-        $adminName = getUserName($userid);
+        // $userid = Auth::user()->id;
+        $adminName = getUserName();
         $softdelete = 0;
+
         $this->validate($request, [
        
             'name' => 'required|string', 
-            'phone' => 'required|unique|min:10|max:15|regex:/^[- +()]*[0-9][- +()0-9]*$/',
-            'email' => 'email|unique|regex:/^([a-z0-9\+\-]+)(\.[a-z0-9\+\-]+)*@([a-z0-9\-]+\.)+([a-z]{2,6})$/',
+            'phone' => 'required|unique:users|min:10|max:15|regex:/^[- +()]*[0-9][- +()0-9]*$/',
+            'email' => 'email|unique:users|regex:/^([a-z0-9\+\-]+)(\.[a-z0-9\+\-]+)*@([a-z0-9\-]+\.)+([a-z]{2,6})$/',
             'address' => 'required|string',
             'password' => 'required|string',
             'role' => 'required'
@@ -114,6 +126,11 @@ class PenggunaController extends Controller
         
         try{
 
+            
+            // $file = $default_photo;
+            // $user = User::find($userid);
+            // $user->gambar = $file;
+            // $user->save();
 
 
             $user = User::create([
@@ -125,16 +142,21 @@ class PenggunaController extends Controller
                 'registerBy' => $adminName,
                 'soft_delete' => $softdelete,
                 'role' => $request['role'],
-                'password' => Hash::make($request['password'],
-                
-                ),
+                'password' => Hash::make($request['password']),
+                // 'gambar' => $default_photo,
             ]);
+           
+            $data = array (
+                'email' => $request->email,
+                'password' => $request->password,
+            );
 
-          
+            Mail::to($user->email)->send(new WelcomeMail($data));
+
 
         
             //redirect
-            return redirect('/pengguna/senarai')->with('message','Branch Successfully Added');
+            return redirect('/pengguna/senarai')->with('message','Successfully Added');
             
         }
         catch(Exception $e){
@@ -155,9 +177,26 @@ class PenggunaController extends Controller
     public function show($id)
     {
         //
-        $user = User::where('id','=',$id)->first();
+        $socmed = Socmed::where('id_user', '=', $id)->first();
+        $user = User::where('id', '=', $id)->first();
+         if (getAccessStatusUser() == 'yes')
+         {
+                    $task = Tugas::where([['tugasBy', '=', getUserName()],['status', '=', '3']])->paginate(4);
+         }
+         else
+         {
+                $task = Tugas::where([['id_user', '=', $id],['status', '=', '3']] )->paginate(4);
+         }
 
-        return view ('pengguna.view',compact('user'));
+         if (getAccessStatusUser() == 'yes')
+         {
+                    $task2 = Tugas::where([['tugasBy', '=', getUserName()],['status', '=', '1']])->paginate(4);
+         }
+         else
+         {
+                $task2 = Tugas::where([['id_user', '=', $id],['status', '=', '1']] )->paginate(4);
+         }
+        return view('pengguna.view', compact('user','socmed', 'task', 'task2'));
     }
 
     /**

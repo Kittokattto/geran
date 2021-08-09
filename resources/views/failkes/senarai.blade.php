@@ -5,22 +5,22 @@ Senarai Geran
 @endsection
 @section('search')
 
-<form action="{!! url('/failkes/search')!!}" method="get" class="d-none d-sm-inline-block shadow-sm">
+<form name="searchForm"   onsubmit="return validateForm()" action="{!! url('/failkes/search')!!}" method="get" class="d-none d-sm-inline-block shadow-sm">
 <div class="input-group">
 	<select name="type" class="form-control  bg-light border-right-2 ">
-		<option value="" disabled selected hidden>Pilih Jenis Carian...</option>
-		<option value="no_hakmilik">No. Hakmilik</option>
+		
+		<option value="no_hakmilik" selected>No. Hakmilik</option>
 		<option value="tajuk_geran">Jenis Hakmilik</option>
 		<option value="daerah">Daerah</option>
 		<option value="no_lot">No. Lot</option>
 		<option value="no_fail">No. Fail</option>
-		<option value="registerBy">Diurus Oleh</option>
+		<option value="pemilik">Pemilik</option>
 	</select>
 	<hr>
-	<input type="search" name="search" class="form-control bg-light border-0 small" placeholder="Cari No Hakmilik"
+	<input type="search" id="search" name="search" class="form-control bg-light border-0 small" placeholder="Carian.."
 		aria-label="Search" aria-describedby="basic-addon2">
 	<div class="input-group-append">
-		<button class="btn btn-primary" type="submit">
+		<button class="btn btn-primary"  type="submit">
 			<i class="fas fa-search fa-sm"></i>
 		</button>
 	</div>
@@ -35,7 +35,7 @@ Senarai Geran
 
 
 
-@if (getAccessStatusUser()=='yes')
+
 <!-- page content -->
 	<div class="right_col" role="main">
         <div id="myModal" class="modal fade" role="dialog">
@@ -56,21 +56,21 @@ Senarai Geran
 			</div>
 		<!-- End Modal for Coupon Data -->
         <div class="">
-			@if(session('message'))
+			{{-- @if(session('message'))
 				<div class="row massage">
 					<div class="col-md-12 col-sm-12 col-xs-12">
 						<div class="checkbox checkbox-success checkbox-circle">
 							@if(session('message') == 'Successfully Submitted')
-							<label for="checkbox-10 colo_success"> {{trans('Successfully Submitted')}}  </label>
+							<label for="checkbox-10 colo_success" class="bg-success text-white shadow"> {{trans('Successfully Submitted')}}  </label>
 						   @elseif(session('message')=='Successfully Updated')
-						   <label for="checkbox-10 colo_success"> {{ trans('app.Successfully Updated')}}  </label>
+						   <label for="checkbox-10 colo_success" class="bg-success text-white shadow"> {{ trans('Successfully Updated')}}  </label>
 						   @elseif(session('message')=='Successfully Deleted')
-						   <label for="checkbox-10 colo_success"> {{ trans('app.Successfully Deleted')}}  </label>
+						   <label for="checkbox-10 colo_success" class="bg-success text-white shadow"> {{ trans('Successfully Deleted')}}  </label>
 						   @endif
 						</div>
 					</div>
 				</div>
-			@endif
+			@endif --}}
 			<div class="row" >
 				<div class="col-md-12 col-sm-12 col-xs-12" >
 
@@ -86,7 +86,16 @@ Senarai Geran
 							
 							
 					</div>
-					   
+					@if(session('message'))
+					<div class="row message">
+						<div class="col-md-12 col-sm-12 col-xs-12">
+							<div class=" bg-success text-white shadow">
+								<div class="row justify-content-center"> {{session('message')}}  </div>
+								
+							</div>
+						</div>
+					</div>
+					@endif
 
 					<?php $userid = Auth::user()->id; ?>
 					<div style="margin:auto;">{{ $geran->links() }}</div>
@@ -100,7 +109,7 @@ Senarai Geran
 									<th>{{ trans('Jenis Hakmilik')}}</th>
 									<th>{{ trans('Pemilik')}}</th>
                                     <th>{{ trans('Bandar/Pekan/Mukim')}}</th>
-                                    <th>{{ trans('Tempat')}}</th>
+                                    
 									<th>{{ trans('No.Lot')}}</th> 
                                     <th>{{ trans('No.Fail')}}</th>
 									<th>{{ trans('Diurus Oleh')}}</th>
@@ -117,7 +126,7 @@ Senarai Geran
 										<td>{{ $gerans->tajuk_geran}}</td>
                                         <td>{{ $gerans->pemilik}}</td>
                                         <td>{{ $gerans->daerah}}</td>
-                                        <td>{{ $gerans->tempat}}</td>
+                                        
                                         <td>{{ $gerans->no_lot}}</td>
 										<td>{{ $gerans->no_fail}}</td>
                                         <td>{{ $gerans->registerby->name}}</td>
@@ -142,22 +151,15 @@ Senarai Geran
 		</div>
 	</div>
 
-	@else
-	<div class="right_col" role="main">
-		<div class="nav_menu main_title" style="margin-top:4px;margin-bottom:15px;">
-            <div class="nav toggle" style="padding-bottom:16px;">
-				<span class="titleup">&nbsp {{ trans('You are not authorize this page.')}}</span>
-            </div>
-		</div>
-	</div>
-	@endif
+
 
 
 
 	
 <script>
 	document.addEventListener("DOMContentLoaded", function(event) {
-	$('body').on('click', '.sa-warning', function() {
+
+	$('#threeBtnInOneLine').on('click', '.sa-warning', function() {
 	
 		var url =$(this).attr('url');
 		
@@ -189,6 +191,10 @@ Senarai Geran
 				}
 				})
 	  }); 
+
+
+
+
   } );
 
 // $('body').on('click', '.sa-warning', function() {
@@ -209,9 +215,22 @@ Senarai Geran
 		   
 // 	  });
 //   }); 
-// } );
+// } 
    
   </script>
 
+<script>
+	function validateForm()
+	{
+		var x = document.forms["searchForm"]["search"].value;
+
+		if (x == null| x == "")
+		{
+		
+			return false;
+		}
+	
+	}
+</script>
 
 @endsection

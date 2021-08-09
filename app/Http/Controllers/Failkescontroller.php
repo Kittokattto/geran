@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use App\Failkes;
 use App\Access;
 use App\Bookmark;
+use App\User;
 
 class Failkescontroller extends Controller
 {
@@ -66,30 +67,31 @@ class Failkescontroller extends Controller
         $softdelete = 0;
         $this->validate($request, [
        
-            'tajuk' => 'required|string', 
+            'tajuk' => 'required', 
             'no_hakmilik' => 'required|regex:/^[0-9]+$/',
-            'pemilik' => 'required|string|regex:/^[a-zA-Z]*$/',
-            'daerah' => 'required|string',
-            'lot' => 'required|regex:/^[0-9]+$/',  
-            'luas' => 'required|string|regex:/^[a-zA-Z0-9]*$/',
-            'no_pelan' => 'required|string|regex:/^[a-zA-Z0-9]*$/',
-            'no_fail' => 'required|string|regex:/^[a-zA-Z0-9]*$/',
-
-            'daftar' => 'required|string',
+            'pemilik' => 'required|regex:/^[a-zA-Z\s]+$/',
+            'daerah' => 'required|regex:/^[a-zA-Z\s]+$/',
+            'lot' => 'required|regex:/^[a-zA-Z0-9]*$/',  
+            'luas' => 'required|string',
+            'no_pelan' => 'required',
+            'no_fail' => 'required',
+            'daftar' => 'required|date_format:Y-m-d',
             'keluaran' => 'nullable|date_format:Y-m-d',
-            'file' => 'file|image|max:5000',
+            'file' => 'mimes:jpeg,bmp,png,jpg,svg|max:500000',
+            'no_hakmilik' => 'required|regex:/^[0-9]+$/',
+            'negeri' => 'required',
+            'no_lembaran' => 'required',
+            'ic' => 'required|regex:/^\d{6}-\d{2}-\d{4}$/',
+            'warga' => 'required|regex:/^[a-zA-Z\s]+$/',
+            'cukai' => 'required|',
+            'alamat' => 'required'
 
-            
+
+
 
         ]);
 
-        // if (request()->hasFile( 'file' )) {
 
-        //     request()->validate([
-                
-        //     ]);
-            
-        // }
 
         try{
 
@@ -97,9 +99,13 @@ class Failkescontroller extends Controller
 
 
                 $geran = new Failkes;
+                
+                //categori geran
                 $geran->tajuk_geran = trim($request['tajuk']);
                 $geran->no_hakmilik = $request['no_hakmilik'];
-                $geran->pemilik = trim ($request ['pemilik']);
+                $geran->cukai =  $request['cukai'];
+
+                //maklumat geran
                 $geran->tempat = trim ($request['tempat']);
                 $geran->negeri = $request['negeri'];
                 $geran->daerah = $request['daerah'];
@@ -109,21 +115,34 @@ class Failkescontroller extends Controller
                 $geran->no_lembaran = trim( $request['no_lembaran']);
                 $geran->no_pelan = trim( $request['no_pelan']);
                 $geran->no_fail = trim( $request['no_fail']);
+                $geran->no_pt = trim( $request['no_pt']);
+                $geran->no_permohonan = trim( $request['no_permohonan']);
+
+                //syarat
                 $geran->syarat = trim( $request['syarat']);
                 $geran->syarat_kepentingan = $request['kepentingan'];
+                $geran->urusan = $request['urusan'];    
+
+                //tarikh
                 $geran->tarikh_daftar = $request['daftar'];
                 $geran->tempoh = $request['tempoh'];
                 $geran->tarikh_keluaran = $request['keluaran'];
-                $geran->no_pt = trim( $request['no_pt']);
-                $geran->no_permohonan = trim( $request['no_permohonan']);
+
+                //rekod tuanpunya
+                $geran->ic = trim( $request['ic']);
+                $geran->warga_negara = trim( $request['warga']);
+                $geran->pemilik = trim ($request ['pemilik']);
+                $geran->alamat = trim ($request ['alamat']);
+
+                //utk DB
                 $geran->registerBy  =$userid;
                 $geran->softdelete  =$softdelete;
                 $geran->rizab = $request['rizab'];
             
 
+               
 
-
-            
+          
           
 
                 $geran->save();
@@ -141,7 +160,7 @@ class Failkescontroller extends Controller
                     if (request()->has('file'))
                     {
                         $geran->update([
-                            'gambar_lot' => \request()->file->store('uploads', 'public'),
+                            'gambar_lot' => request()->file->store('uploads', 'public'),
                         ]);
                     }
                 }
@@ -200,6 +219,13 @@ class Failkescontroller extends Controller
         //
         $search = $request->get('search');
         $column = $request->get('type');
+
+        // if($column == 'registerBy')
+        // {
+        //     $userid = User::where ('name', '=', '%'.$search );
+        //     $geran = Failkes::where( $column,'=', $userid)->paginate(20);
+        //     return view('failkes.senarai',compact('geran')); 
+        // }
         $geran = Failkes::where( $column,'like', '%'.$search.'%')->paginate(20);
         return view('failkes.senarai',compact('geran')); 
     }
@@ -214,26 +240,50 @@ class Failkescontroller extends Controller
     public function update(Request $request, $id)
     {
         //
+        $userid = Auth::user()->id;
+        
+        $softdelete = 0;
         $this->validate($request, [
        
-            'tajuk' => 'required|string', 
-            'no_hakmilik' => 'required|unique|regex:/^[0-9]+$/',
-            'pemilik' => 'required|string',
-            'daerah' => 'required|string',
-            'lot' => 'required|regex:/^[0-9]+$/',  
+            'tajuk' => 'required', 
+            'no_hakmilik' => 'required|regex:/^[0-9]+$/',
+            'pemilik' => 'required|regex:/^[a-zA-Z\s]+$/',
+            'daerah' => 'required|regex:/^[a-zA-Z\s]+$/',
+            'lot' => 'required|regex:/^[a-zA-Z0-9]*$/',  
             'luas' => 'required|string',
-            'no_pelan' => 'required|string',
-            'no_fail' => 'required|string',
-            'daftar' => 'required|string',
+            'no_pelan' => 'required',
+            'no_fail' => 'required',
+            'daftar' => 'required|date_format:Y-m-d',
             'keluaran' => 'nullable|date_format:Y-m-d',
+            'file' => 'mimes:jpeg,bmp,png,jpg| max:500000',
+            'no_hakmilik' => 'required|regex:/^[0-9]+$/',
+            'negeri' => 'required',
+            'no_lembaran' => 'required',
+            'ic' => 'required|regex:/^\d{6}-\d{2}-\d{4}$/',
+            'warga' => 'required|regex:/^[a-zA-Z\s]+$/',
+            'cukai' => 'required|',
+            'alamat' => 'required'
+
+
+
 
         ]);
-        $userid = Auth::user()->id;
 
-        $geran = Failkes::find($id);
+
+
+        try{
+
+
+
+
+                $geran = Failkes::find($id);
+                
+                //categori geran
                 $geran->tajuk_geran = trim($request['tajuk']);
                 $geran->no_hakmilik = $request['no_hakmilik'];
-                $geran->pemilik = trim ($request ['pemilik']);
+                $geran->cukai =  $request['cukai'];
+
+                //maklumat geran
                 $geran->tempat = trim ($request['tempat']);
                 $geran->negeri = $request['negeri'];
                 $geran->daerah = $request['daerah'];
@@ -243,14 +293,28 @@ class Failkescontroller extends Controller
                 $geran->no_lembaran = trim( $request['no_lembaran']);
                 $geran->no_pelan = trim( $request['no_pelan']);
                 $geran->no_fail = trim( $request['no_fail']);
+                $geran->no_pt = trim( $request['no_pt']);
+                $geran->no_permohonan = trim( $request['no_permohonan']);
+
+                //syarat
                 $geran->syarat = trim( $request['syarat']);
                 $geran->syarat_kepentingan = $request['kepentingan'];
+                $geran->urusan = $request['urusan'];    
+
+                //tarikh
                 $geran->tarikh_daftar = $request['daftar'];
                 $geran->tempoh = $request['tempoh'];
                 $geran->tarikh_keluaran = $request['keluaran'];
-                $geran->no_pt = trim( $request['no_pt']);
-                $geran->no_permohonan = trim( $request['no_permohonan']);
-  
+
+                //rekod tuanpunya
+                $geran->ic = trim( $request['ic']);
+                $geran->warga_negara = trim( $request['warga']);
+                $geran->pemilik = trim ($request ['pemilik']);
+                $geran->alamat = trim ($request ['alamat']);
+
+                //utk DB
+                
+                $geran->softdelete  =$softdelete;
                 $geran->rizab = $request['rizab'];
 
 
@@ -269,6 +333,12 @@ class Failkescontroller extends Controller
                     $access->save();
                 }
                 return redirect('/failkes/senarai')->with('message','Successfully Updated');
+            }
+            catch(Exception $e){
+                //throw new Exception('Throw exception test'); //enable this to test exceptions
+                 throw new Exception("Could not save data, Please contact us if it happends again.");
+                 return back()->withError($e->getMessage())->withInput();
+            }
     }
 
     /**

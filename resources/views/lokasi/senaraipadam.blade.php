@@ -5,20 +5,20 @@ Senarai Lokasi Fail Kes
 @endsection
 @section('search')
 
-<form action="{!! url('/failkes/search')!!}" method="get" class="d-none d-sm-inline-block shadow-sm">
+<form action="{!! url('/failkes/search')!!}" name="searchForm"   onsubmit="return validateForm()" method="get" class="d-none d-sm-inline-block shadow-sm">
 <div class="input-group">
 	<select name="type" id class="form-control  bg-light border-right-2 ">
-		<option value="" disabled selected hidden>Pilih Jenis Carian...</option>
-		<option value="jenis_file">Jenis Fail</option>
+	
+		<option value="jenis_file" selected>Jenis Fail</option>
 		<option value="tajuk_file">Tajuk Fail</option>
 		<option value="status">Status</option>
 		<option value="lokasi">Lokasi</option>
 		{{-- <option value="created_at">Tarikh Detempatkan</option> --}}
-		<option value="id_user">Ditempatkan Oleh</option>
+		{{-- <option value="id_user">Ditempatkan Oleh</option> --}}
 	</select>
 
 	<hr>
-	<input type="search" name="search"class="form-control bg-light border-0 small" placeholder="Cari Tajuk Fail..."
+	<input type="search" id="search" name="search"class="form-control bg-light border-0 small" placeholder="Cari Tajuk Fail..."
 		aria-label="Search" aria-describedby="basic-addon2">
 	<div class="input-group-append">
 		<button class="btn btn-primary" type="submit">
@@ -99,7 +99,7 @@ Senarai Lokasi Fail Kes
 
 									<th>{{ trans('Jenis Fail')}}</th>
 									<th>{{ trans('Tajuk Fail')}}</th>
-									<th>{{ trans('No Hakmilik')}}</th>
+									
                                     <th>{{ trans('Lokasi')}}</th>
 									<th>{{ trans('Status')}}</th>
 									<th>{{ trans('Jumlah Salinan')}}</th> 
@@ -117,7 +117,7 @@ Senarai Lokasi Fail Kes
 										<td>{{ $i }}</td>
 										<td>{{ $lokasis->jenis_file}}</td>
 										<td>{{ $lokasis->tajuk_file}}</td>
-										<td>{{ $lokasis->no_hakmilik}}</td>
+										
 										<td>{{ $lokasis->lokasi}}</td>
 										<td>{{ $lokasis->status}}</td>
                                         <td>{{ $lokasis->copy}}</td>
@@ -216,6 +216,19 @@ Senarai Lokasi Fail Kes
 // } );
    
   </script>
+  <script>
+	function validateForm()
+	{
+		var x = document.forms["searchForm"]["search"].value;
+
+		if (x == null| x == "")
+		{
+		
+			return false;
+		}
+	
+	}
+</script>
 
 
 @endsection
