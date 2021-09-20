@@ -58,7 +58,7 @@ Tambah Fail Kes
                                 @if (session('error'))
 							<div class="alert alert-danger"><span class="fa fa-times"></span><em> {{ session('error') }} </em></div>
 						    @endif
-                                <form id="demo-form2" action="{!! url('/lokasi/store')!!}" method="post" 
+                                <form id="demo-form2" action="{!! url('/lokasi/senarai')!!}" method="get" 
                                 enctype="multipart/form-data" data-parsley-validate 
                                          class="form-horizontal form-label-left input_mask customerAddForm">
                                          @csrf

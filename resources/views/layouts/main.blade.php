@@ -18,8 +18,7 @@
        
         <link href="https://cdn.jsdelivr.net/gh/gitbrent/bootstrap4-toggle@3.6.1/css/bootstrap4-toggle.min.css" rel="stylesheet">
         <!-- Full Calender -->
-        <link rel="stylesheet" href=" {{ URL::asset('css/main.min.css')}}">
-        <script src="{{ URL::asset('js/main.min.js') }}"></script>
+
         
         {{-- <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/fullcalendar/3.9.0/fullcalendar.css" />
     <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.24.0/moment.min.js"></script>
@@ -474,8 +473,8 @@
             {{-- <script src="{{ URL::asset('vendor/chart.js/Chart.min.js') }}"></script> --}}
 
             <!-- Page level custom scripts -->
-            {{-- <script src="{{ URL::asset('js/demo/chart-area-demo.js') }}"></script>
-            <script src="{{ URL::asset('js/demo/chart-pie-demo.js') }}"></script> --}}
+            <script src="{{ URL::asset('js/demo/chart-area-demo.js') }}"></script>
+            <script src="{{ URL::asset('js/demo/chart-pie-demo.js') }}"></script>
 
             <!-- Full Calendar -->
 

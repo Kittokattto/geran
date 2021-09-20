@@ -80,17 +80,18 @@ Route::prefix('/lokasi')->group(function () {
 
     Route::get('/senarai',['as'=>'/senarai/lokasi','uses'=>'Lokasicontroller@index']);
     Route::get('/tambah',['as'=>'/tambah/lokasi','uses'=>'Lokasicontroller@add']);
-    Route::post('/store',['as'=>'/tambah/pengguna','uses'=>'Lokasicontroller@store']);
+    Route::post('/store',['as'=>'/tambah/lokasi','uses'=>'Lokasicontroller@store']);
     Route::get('/show/{id}',['as'=>'/maklumat','uses'=>'Lokasicontroller@show']);
     Route::get('/edit/{id}',['as'=>'/maklumat','uses'=>'Lokasicontroller@edit']);
     Route::post('edit/update/{id}',['as'=>'/kemaskini','uses'=>'Lokasicontroller@update']);
-    Route::post('adddetails/updatelink/{id}',['as'=>'/kemaskini','uses'=>'Lokasicontroller@updatelink']);
+    Route::post('store/updatelink/{id}',['as'=>'/store/updatelink','uses'=>'Lokasicontroller@updatelink']);
     Route::get('/padam/{id}',['as'=>'/maklumat','uses'=>'Lokasicontroller@destroy']);
     Route::get('/search',['as'=>'/tambah/lokasi','uses'=>'Lokasicontroller@search']);
     Route::get('/senaraipadam',['as'=>'/senaraipadam/lokasi','uses'=>'Lokasicontroller@indexdelete']);
     Route::get('/restore/{id}',['as'=>'/maklumat','uses'=>'Lokasicontroller@restore']);
     Route::get('/delete/{id}',['as'=>'/maklumat','uses'=>'Lokasicontroller@permenantdelete']);
 });
+
 
 
 Route::prefix('tugas')->group(function () {

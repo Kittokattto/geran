@@ -158,11 +158,13 @@ class Lokasicontroller extends Controller
             
                 $lokasi->save();
                 $linknew = getNewLocationID();
+
+                $linkbaru = Lokasi::where('id', '=', $linknew )->first();
             
             //redirect
                 
                 
-            return view('/lokasi/adddetails',compact('linknew'));
+            return view('/lokasi/adddetails',compact('linkbaru'));
             
         }
         catch(Exception $e){
@@ -183,8 +185,8 @@ class Lokasicontroller extends Controller
     {
         //
         $lokasi = Lokasi::where('id','=',$id)->first();
-
-        return view ('lokasi.view',compact('lokasi'));
+        $geran = Failkes::where('geran_id', '=', $lokasi->id_geran);
+        return view ('lokasi.view',compact('lokasi','geran'));
     }
 
     /**
@@ -285,7 +287,7 @@ class Lokasicontroller extends Controller
             'no_fail' => 'required',
             'daftar' => 'required|date_format:Y-m-d',
             'keluaran' => 'nullable|date_format:Y-m-d',
-            'file' => 'mimes:jpeg,bmp,png,jpg,gif,svg,pdf,doc,docx,zip|max:5000',
+            'file' => 'mimes:jpeg,bmp,png,jpg| max:500000',
             'no_hakmilik' => 'required|regex:/^[0-9]+$/',
             'negeri' => 'required',
             'no_lembaran' => 'required',
@@ -349,7 +351,7 @@ class Lokasicontroller extends Controller
 
                
 
-            
+            dd($geran);
           
 
                 $geran->save();
@@ -386,7 +388,7 @@ class Lokasicontroller extends Controller
 
 
             //redirect
-            return redirect('/failkes/senarai')->with('message',' Successfully Added');
+            return redirect('/lokasi/senarai')->with('message',' Successfully Link');
             
         }
         catch(Exception $e){

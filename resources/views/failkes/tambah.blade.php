@@ -65,8 +65,8 @@ Tambah Fail Kes
                                                     <div class="col-md-6 col-sm-6 col-xs-12 form-group has-feedback">
                                                         <label class="control-label col-md-4 col-sm-4 col-xs-12" for="tajuk">{{ trans('Jenis Geran') }} <label class="text-danger">*</label></label>
                                                         <div class="col-md-8 col-sm-8 col-xs-12">
-                                                            <select name="tajuk" id="tajuk"  class="form-control" value="{{ old('tajuk') }}"  autocomplete="tajuk" >
-                                                                <option value="" disabled selected hidden>Pilih Jenis Geran</option>
+                                                            <select name="tajuk" id="tajuk"  class="form-control" aria-placeholder="Pilih Jenis Geran" value="{{ old('tajuk') }}"  autocomplete="tajuk" >
+                                                                {{-- <option value="" disabled selected hidden>Pilih Jenis Geran</option> --}}
                                                                 <option value="Geran">Geran</option>
                                                                 <option value="Geran Mukim">Geran Mukim</option>
                                                                 <option value="Pajakan">Pajakan</option>
@@ -444,9 +444,9 @@ Tambah Fail Kes
                                                     <div class="col-md-9 col-sm-9 col-xs-12 form-group has-feedback">
                                                         <label class="control-label col-md-9 col-sm-9 col-xs-12"" for="display-name">{{ trans('Alamat Pemilik')}} <label class="text-danger">*</label></label>
                                                         <div class="col-md-10 col-sm-10 col-xs-12 input-group date">
-                                                            <textarea rows="5" cols="50" name="alamat" placeholder="{{ trans('Alamat Penuh')}}" value="{{ old('alamat') }}" class="form-control" ></textarea>
+                                                            <textarea rows="5" cols="50" name="alamat" placeholder="{{ trans('Alamat Penuh')}}" value="{{ old('alamat') }}" autocomplete='alamat' class="form-control" ></textarea>
                                                             @if ($errors->has('alamat'))
-                                                            <span class="help-block text-danger">
+                                                            <span class="help-block text-danger" autofocus>
                                                                 <strong>{{ $errors->first('alamat') }}</strong>
                                                             </span>
                                                             @endif
